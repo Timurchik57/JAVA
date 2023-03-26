@@ -32,51 +32,62 @@ abstract public class Abstract {
         setUp();
     }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    /** метод для ожидания элемента */
-    public static void WaitElement (By locator) {
+    public void WaitElement(By locator){
         wait.until(visibilityOfElementLocated(locator));
     }
 
-    /** метод Найти эелемент, показать его и нажать */
-    public static void ClickElement (By locator) throws InterruptedException {
+    public void ClickElement(By locator){
         WaitElement(locator);
         WebElement element = driver.findElement(locator);
         actions.moveToElement(element);
         actions.perform();
-        Thread.sleep(1200);
         element.click();
     }
 
-    /** метод для ввода данных  */
-    public static void inputWord (By locator, String Word) {
-        WaitElement(locator);
-        WebElement element = driver.findElement(locator);
-        actions.moveToElement(element);
-        actions.perform();
-        element.sendKeys();
-    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+//    /** метод для ожидания элемента */
+//    public static void WaitElement (By locator) {
+//        wait.until(visibilityOfElementLocated(locator));
+//    }
+//
+//    /** метод Найти эелемент, показать его и нажать */
+//    public static void ClickElement (By locator) throws InterruptedException {
+//        WaitElement(locator);
+//        WebElement element = driver.findElement(locator);
+//        actions.moveToElement(element);
+//        actions.perform();
+//        Thread.sleep(1200);
+//        element.click();
+//    }
+//
+//    /** метод для ввода данных  */
+//    public static void inputWord (By locator, String Word) {
+//        WaitElement(locator);
+//        WebElement element = driver.findElement(locator);
+//        actions.moveToElement(element);
+//        actions.perform();
+//        element.sendKeys();
+//    }
 }
