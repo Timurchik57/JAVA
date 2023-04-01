@@ -17,16 +17,13 @@ public class OpenYandex extends Abstract {
         PageFactory.initElements(driver, this);
     }
 
-    public String Yandex = "https://ya.ru";
+    public String Yandex = "https://yandex.ru/search/?text=поиск&lr=54&search_source=yaru_desktop_common";
 
-    @FindBy(xpath = "//input[@placeholder='найдётся всё']")
+    @FindBy(xpath = "//input[@class='input__control mini-suggest__input']")
     public WebElement SearchBar;
-    public By SearchBarWait = By.xpath("//input[@placeholder='найдётся всё']");
+    public By SearchBarWait = By.xpath("//input[@class='input__control mini-suggest__input']");
 
     @FindBy(xpath = "//button[contains(.,'Найти')]")
     public WebElement Search;
     public By SearchWait = By.xpath("//button[contains(.,'Найти')]");
-
-
-
 }
