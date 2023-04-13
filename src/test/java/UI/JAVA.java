@@ -1,37 +1,49 @@
 package UI;
 
+import UI.PageObject.IDEA;
 import UI.PageObject.OpenYandex;
+import io.github.artsok.RepeatedIfExceptionsTest;
 import io.qameta.allure.*;
+import org.junit.Rule;
+import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.openqa.selenium.By;
 
-import static org.openqa.selenium.support.ui.ExpectedConditions.invisibilityOfElementLocated;
-import static org.openqa.selenium.support.ui.ExpectedConditions.visibilityOfElementLocated;
-
 @ExtendWith(TestListener.class)
 @Feature("Тесты связанные с погодой")
-public class JAVA extends Abstract {
+public class JAVA extends Abstract{
 
     OpenYandex openYandex;
+    IDEA idea;
+
+    @Rule
+    public RetryRule  rule = new RetryRule(2);
 
     @Issue(value = "TEL-123")
     @Link(name = "Погода", url = "https://yandex.ru/pogoda/moscow?from=1")
     @Owner(value = "Иван Иванов")
     @DisplayName("Проверка времени в Москве")
     @Description("Allure Framework")
-    @Test
+    @RepeatedIfExceptionsTest(repeats = 1)
     public void SuccessTest() throws InterruptedException {
         openYandex = new OpenYandex(driver);
+        idea = new IDEA(driver);
 
-        driver.get(openYandex.Yandex);
-        WaitElement(openYandex.SearchBarWait);
-        openYandex.SearchBar.sendKeys("Время в Москве");
-        ClickElement(openYandex.SearchWait);
+        driver.get(idea.Idea);
+        ClickElement(idea.DeveloperTools);
+        ClickElement(idea.WebStorm);
     }
 
     @Test
+    @DisplayName("Проверка времени в Москве")
+    public void FiledTest2() {
+        Assertions.assertEquals(1, 2);
+    }
+
+    @RepeatedIfExceptionsTest(repeats = 1)
+    @DisplayName("Проверка времени в Москве")
     public void FiledTest() {
         driver.get("https://ya.ru");
         WaitElement(openYandex.SearchBarWait);

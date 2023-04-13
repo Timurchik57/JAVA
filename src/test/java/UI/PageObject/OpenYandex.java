@@ -17,7 +17,7 @@ public class OpenYandex extends Abstract {
         PageFactory.initElements(driver, this);
     }
 
-    public String Yandex = "https://yandex.ru/search/?text=поиск&lr=54&search_source=yaru_desktop_common";
+    public String Yandex = "https://www.ozon.ru/";
 
     @FindBy(xpath = "//input[@class='input__control mini-suggest__input']")
     public WebElement SearchBar;
@@ -26,4 +26,6 @@ public class OpenYandex extends Abstract {
     @FindBy(xpath = "//button[contains(.,'Найти')]")
     public WebElement Search;
     public By SearchWait = By.xpath("//button[contains(.,'Найти')]");
+
+    public By ClickFirst = By.xpath("//ul[@id='search-result']/li[1]/div/div[1]/a");
 }
