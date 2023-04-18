@@ -88,15 +88,6 @@
             <version>${webdrivermanager.version}</version>
         </dependency>
 
-        <!-- для перезапуска упавших тестов -->
-        <dependency>
-            <groupId>io.github.artsok</groupId>
-            <artifactId>rerunner-jupiter</artifactId>
-            <version>2.1.6</version>
-            <scope>test</scope>
-        </dependency>
-
-
         <!-- эффективно автоматизировать тестирование современных динамических веб приложений - значок $ -->
         <!--        <dependency>-->
         <!--            <groupId>com.codeborne</groupId>-->
@@ -267,7 +258,6 @@
             <version>RELEASE</version>
             <scope>test</scope>
         </dependency>
-
 
     </dependencies>
 </project>

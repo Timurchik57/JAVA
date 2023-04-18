@@ -1,6 +1,5 @@
 package UI;
 
-import UI.Abstract;
 import io.github.bonigarcia.wdm.WebDriverManager;
 import io.qameta.allure.Allure;
 import org.junit.jupiter.api.extension.ExtensionContext;
@@ -8,7 +7,6 @@ import org.junit.jupiter.api.extension.TestWatcher;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.logging.LogType;
-
 
 public class TestListener implements TestWatcher {
 
@@ -18,22 +16,21 @@ public class TestListener implements TestWatcher {
                 "Скриншот на месте падания теста", "image/png", "png",
                 ((TakesScreenshot) Abstract.driver).getScreenshotAs(OutputType.BYTES)
         );
-
-        Allure.addAttachment("Логи после падения теста: ", String.valueOf( Abstract.driver.manage().logs().get(LogType.BROWSER).getAll()));
+        Allure.addAttachment("Логи после падения теста: ",
+                             String.valueOf(Abstract.driver.manage().logs().get(LogType.BROWSER).getAll()));
         WebDriverManager.chromedriver().quit();
         Abstract.driver.quit();
-        System.out.println("Добро");
     }
 
     @Override
     public void testSuccessful(ExtensionContext context) {
         Allure.getLifecycle().addAttachment(
                 "Скриншот после успешного прохождения теста", "image/png", "png",
-                ((TakesScreenshot)Abstract.driver).getScreenshotAs(OutputType.BYTES)
+                ((TakesScreenshot) Abstract.driver).getScreenshotAs(OutputType.BYTES)
         );
-        Allure.addAttachment("Логи после успешного прохождения теста: ", String.valueOf( Abstract.driver.manage().logs().get(LogType.BROWSER).getAll()));
+        Allure.addAttachment("Логи после успешного прохождения теста: ",
+                             String.valueOf(Abstract.driver.manage().logs().get(LogType.BROWSER).getAll()));
         WebDriverManager.chromedriver().quit();
         Abstract.driver.quit();
-        System.out.println("Добро");
     }
 }

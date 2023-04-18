@@ -1,5 +1,6 @@
 package UI;
 
+import UI.PageObject.SQL;
 import io.github.bonigarcia.wdm.WebDriverManager;
 import org.junit.jupiter.api.BeforeEach;
 import org.openqa.selenium.*;
@@ -9,16 +10,20 @@ import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.events.EventFiringWebDriver;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
+import java.io.*;
+
 import static org.openqa.selenium.support.ui.ExpectedConditions.visibilityOfElementLocated;
 
-abstract public class Abstract{
+abstract public class Abstract {
 
     public static EventFiringWebDriver driver;
     public static ChromeOptions chromeOptions;
     public static WebDriverWait wait;
     public static Actions actions;
+    public SQL sql;
+    public static String Count;
 
-    public static void setUp(){
+    public static void setUp() {
         WebDriverManager.chromedriver().setup();
         chromeOptions = new ChromeOptions();
         chromeOptions.setHeadless(true);
@@ -30,8 +35,11 @@ abstract public class Abstract{
     }
 
     @BeforeEach
-    public void init(){
+    public void init() throws IOException {
+        sql = new SQL();
+        Count = "1";
         setUp();
+        sql.Connect();
     }
 
     public void WaitElement(By locator){
@@ -45,51 +53,4 @@ abstract public class Abstract{
         actions.perform();
         element.click();
     }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-//    /** метод для ожидания элемента */
-//    public static void WaitElement (By locator) {
-//        wait.until(visibilityOfElementLocated(locator));
-//    }
-//
-//    /** метод Найти эелемент, показать его и нажать */
-//    public static void ClickElement (By locator) throws InterruptedException {
-//        WaitElement(locator);
-//        WebElement element = driver.findElement(locator);
-//        actions.moveToElement(element);
-//        actions.perform();
-//        Thread.sleep(1200);
-//        element.click();
-//    }
-//
-//    /** метод для ввода данных  */
-//    public static void inputWord (By locator, String Word) {
-//        WaitElement(locator);
-//        WebElement element = driver.findElement(locator);
-//        actions.moveToElement(element);
-//        actions.perform();
-//        element.sendKeys();
-//    }
 }

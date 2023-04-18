@@ -8,11 +8,9 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.events.EventFiringWebDriver;
 
-import static org.openqa.selenium.support.ui.ExpectedConditions.visibilityOfElementLocated;
-
 public class OpenYandex extends Abstract {
 
-    public OpenYandex (WebDriver driver){
+    public OpenYandex(WebDriver driver) {
         this.driver = (EventFiringWebDriver) driver;
         PageFactory.initElements(driver, this);
     }
