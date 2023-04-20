@@ -125,7 +125,6 @@
             <version>2.17.0</version>
         </dependency>
 
-
         <!-- для отправки API -->
         <dependency>
             <groupId>io.rest-assured</groupId>
@@ -148,7 +147,6 @@
             <artifactId>json</artifactId>
             <version>20220924</version>
         </dependency>
-
 
         <!-- служит основой для запуска фреймворков тестирования на JVM (виртаульной машине Java), а также предоставляет API для запуска тестов из консоли -->
         <dependency>
