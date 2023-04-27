@@ -9,22 +9,37 @@ import io.restassured.http.ContentType;
 import io.restassured.path.json.JsonPath;
 import org.junit.jupiter.api.*;
 import org.junit.jupiter.api.extension.ExtendWith;
+import org.openqa.selenium.WebElement;
 
 import java.io.IOException;
 import java.sql.SQLException;
 
 import static io.restassured.RestAssured.given;
-
 @ExtendWith(TestListener.class)
-@Feature("Тесты связанные с погодой")
-@TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 public class JAVA extends Abstract {
 
     OpenYandex openYandex;
     IDEA idea;
     public String ID;
 
-    @Order(1)
+    @Test
+    public void ShadowDoom() throws InterruptedException, SQLException, IOException {
+        idea = new IDEA(driver);
+
+        driver.get(idea.Idea);
+        ClickElement(idea.OpenSearch);
+        WaitElement(idea.Search);
+
+        inputWord(driver.findElement(idea.Search), "Тест ");
+
+        WebElement web = driver.findElement(idea.Search);
+        WebElement shadow1 = getShadow(web, driver);
+        String str = shadow1.findElement(idea.Search).getText();
+        System.out.println(str);
+
+        driver.findElement(idea.Search).sendKeys("1234dfhg");
+    }
+
     @Issue(value = "TEL-123")
     @Link(name = "Погода", url = "https://yandex.ru/pogoda/moscow?from=1")
     @Owner(value = "Иван Иванов")
@@ -51,15 +66,14 @@ public class JAVA extends Abstract {
         sql.UpdateConnection("Insert into testBD (name, qwerty) value ('алекс', '0987');");
     }
 
-    @Order(2)
+
     @Test
     @DisplayName("Проверка по id")
     public void SuccessTest1() {
-
         JsonPath response = given()
                 .filter(new AllureRestAssured())
-                //.log().all()
-                //.header("Authorization", "Bearer ")
+                .log().all()
+                .header("Authorization", "Bearer ")
                 .contentType(ContentType.JSON)
                 .when()
                 .body("{\n" +
@@ -78,11 +92,10 @@ public class JAVA extends Abstract {
     @Test
     @DisplayName("Проверка по id")
     public void FiledTest2() {
-
         JsonPath response = given()
                 .filter(new AllureRestAssured())
-                //.log().all()
-                //.header("Authorization", "Bearer ")
+                .log().all()
+                .header("Authorization", "Bearer ")
                 .contentType(ContentType.JSON)
                 .when()
                 .get("https://reqres.in/api/users/2")

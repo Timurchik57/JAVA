@@ -26,10 +26,10 @@ abstract public class Abstract {
     public static void setUp() {
         WebDriverManager.chromedriver().setup();
         chromeOptions = new ChromeOptions();
-        chromeOptions.setHeadless(true);
-        chromeOptions.addArguments("window-size=1920, 1080");
+        //chromeOptions.setHeadless(true);
+        //chromeOptions.addArguments("window-size=1920, 1080");
         driver = new EventFiringWebDriver(new ChromeDriver(chromeOptions));
-        //driver.manage().window().maximize();
+        driver.manage().window().maximize();
         wait = new WebDriverWait(driver, 20);
         actions = new Actions(driver);
     }
@@ -37,20 +37,30 @@ abstract public class Abstract {
     @BeforeEach
     public void init() throws IOException {
         sql = new SQL();
-        Count = "1";
         setUp();
-        sql.Connect();
     }
 
-    public void WaitElement(By locator){
+    public void WaitElement(By locator) {
         wait.until(visibilityOfElementLocated(locator));
     }
 
-    public void ClickElement(By locator){
+    public void ClickElement(By locator) {
         WaitElement(locator);
         WebElement element = driver.findElement(locator);
         actions.moveToElement(element);
         actions.perform();
         element.click();
+    }
+
+    public static void inputWord(WebElement element, String word) {
+        JavascriptExecutor js = (JavascriptExecutor) driver;
+        js.executeScript("arguments[0].value='"+word+"'", element);
+        element.sendKeys(Keys.BACK_SPACE);
+    }
+
+    public static WebElement getShadow(WebElement element, WebDriver driver) {
+        JavascriptExecutor js = (JavascriptExecutor) driver;
+        WebElement shadowDom = (WebElement) js.executeScript("return arguments[0].shadowRoot", element);
+        return shadowDom;
     }
 }

@@ -20,4 +20,13 @@ public class IDEA extends Abstract {
     public By WebStorm = By.xpath(
             "(//h5[contains(.,'IDEs')])[1]/following-sibling::div//div[@class='_mainSubmenuSubColumns__column_kut92 _mainSubmenuSubColumns__column--6_tg83s'][2]/div/div[last()]");
     public By WebStormCss = By.cssSelector(".wt-offset-top-12");
+
+    /** Поиск на главной странице*/
+    public By Search = By.xpath(
+            "//input[@placeholder='Ctrl+K for advanced search']");
+
+    /** Поиск на главной странице*/
+    public By OpenSearch = By.xpath(
+            "(//button[@aria-label='Open search'])[1]");
+
 }
