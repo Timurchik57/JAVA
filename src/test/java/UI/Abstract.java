@@ -26,10 +26,10 @@ abstract public class Abstract {
     public static void setUp() {
         WebDriverManager.chromedriver().setup();
         chromeOptions = new ChromeOptions();
-        //chromeOptions.setHeadless(true);
-        //chromeOptions.addArguments("window-size=1920, 1080");
+        chromeOptions.setHeadless(true);
+        chromeOptions.addArguments("window-size=1920, 1080");
         driver = new EventFiringWebDriver(new ChromeDriver(chromeOptions));
-        driver.manage().window().maximize();
+        //driver.manage().window().maximize();
         wait = new WebDriverWait(driver, 20);
         actions = new Actions(driver);
     }
