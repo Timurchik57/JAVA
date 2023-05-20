@@ -39,4 +39,11 @@ public class IDEA extends Abstract {
     public By OpenSearch = By.xpath(
             "(//button[@aria-label='Open search'])[1]");
 
+    /** Атрибут покупки */
+    public By Buy = By.xpath(
+            "//a[@data-test='site-header-cart-action']");
+
+    /** Главное название */
+    public By Header = By.xpath(
+            "//h1[@class='rs-hero rs-hero_theme_dark wt-offset-top-32']");
 }

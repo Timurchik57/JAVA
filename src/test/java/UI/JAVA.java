@@ -27,6 +27,24 @@ public class JAVA extends Abstract {
     public String ID;
 
     @Test
+    @DisplayName("Сравнение Атрибутов")
+    public void Attribute() throws InterruptedException, SQLException {
+        idea = new IDEA(driver);
+        driver.get(idea.Idea);
+        WaitElement(idea.Buy);
+        WaitElement(idea.Header);
+
+        String Attribute = driver.findElement(idea.Buy).getAttribute("aria-label");
+        String CssAttribute = driver.findElement(idea.Header).getCssValue("font-size");
+
+        System.out.println("Первый тест");
+        Assertions.assertEquals(Attribute, "Navigate to Store", "Нужный атрибут не совпадает со значением Navigate to Store");
+
+        System.out.println("Второй тест");
+        Assertions.assertEquals(CssAttribute, "72px", "Нужный атрибут не совпадает со значением CSS ");
+    }
+
+    @Test
     @DisplayName("Определяем множество значений в List")
     public void List() throws InterruptedException, SQLException {
         idea = new IDEA(driver);
