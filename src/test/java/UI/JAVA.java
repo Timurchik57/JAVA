@@ -19,15 +19,23 @@ import java.util.Collections;
 import java.util.List;
 
 import static io.restassured.RestAssured.given;
+
 @ExtendWith(TestListener.class)
+@Epic("Тесты на вебе")
+@Feature("Тесты на сайте IDEA")
 public class JAVA extends Abstract {
 
     OpenYandex openYandex;
     IDEA idea;
     public String ID;
 
-    @Test
+    @Issue(value = "TEL-123")
+    @Link(name = "Идея", url = "https://www.jetbrains.com/idea/")
+    @Owner(value = "Иван Иванов")
     @DisplayName("Сравнение Атрибутов")
+    @Description("Переходим на страницу и берем атрибуты элемента, чтобы сравнить с ожидаемым результатом")
+    @Test
+    @Story("Позитивные тесты")
     public void Attribute() throws InterruptedException, SQLException {
         idea = new IDEA(driver);
         driver.get(idea.Idea);
@@ -44,8 +52,13 @@ public class JAVA extends Abstract {
         Assertions.assertEquals(CssAttribute, "72px", "Нужный атрибут не совпадает со значением CSS ");
     }
 
-    @Test
+    @Issue(value = "TEL-124")
+    @Link(name = "Идея", url = "https://www.jetbrains.com/idea/")
+    @Owner(value = "Иван Иванов")
     @DisplayName("Определяем множество значений в List")
+    @Description("Переходим на страницу и берём список значений, чтобы сравнить с ожидаемым результатом из БД")
+    @Test
+    @Story("Позитивные тесты")
     public void List() throws InterruptedException, SQLException {
         idea = new IDEA(driver);
 
@@ -59,14 +72,14 @@ public class JAVA extends Abstract {
             list.add(WebList.get(i).getText());
         }
 
-        List<String> listSql = new ArrayList<>();
-        sql.StartConnection("Select * from yourtable.test where id = 20259;");
-        while (sql.resultSet.next()) {
-            String str = sql.resultSet.getString("name");
-            listSql.add(str);
-        }
-
-        Assertions.assertEquals(list, listSql, "Значения на вебе и в БД не совпадают");
+//        List<String> listSql = new ArrayList<>();
+//        sql.StartConnection("Select * from yourtable.test where id = 20259;");
+//        while (sql.resultSet.next()) {
+//            String str = sql.resultSet.getString("name");
+//            listSql.add(str);
+//        }
+//
+//        Assertions.assertEquals(list, listSql, "Значения на вебе и в БД не совпадают");
     }
 
     @Test

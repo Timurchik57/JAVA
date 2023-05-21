@@ -2,6 +2,8 @@ package UI;
 
 import UI.PageObject.SQL;
 import io.github.bonigarcia.wdm.WebDriverManager;
+import io.qameta.allure.Allure;
+import io.qameta.allure.Step;
 import org.junit.jupiter.api.BeforeEach;
 import org.openqa.selenium.*;
 import org.openqa.selenium.chrome.ChromeDriver;
@@ -30,6 +32,7 @@ abstract public class Abstract {
         chromeOptions.addArguments("window-size=1920, 1080");
         driver = new EventFiringWebDriver(new ChromeDriver(chromeOptions));
         //driver.manage().window().maximize();
+        driver.register(new Custom());
         wait = new WebDriverWait(driver, 20);
         actions = new Actions(driver);
     }
@@ -44,6 +47,7 @@ abstract public class Abstract {
         wait.until(visibilityOfElementLocated(locator));
     }
 
+    @Step("Нажимаем на элемент")
     public void ClickElement(By locator) {
         WaitElement(locator);
         WebElement element = driver.findElement(locator);
