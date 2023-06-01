@@ -40,6 +40,7 @@ abstract public class Abstract {
     @BeforeEach
     public void init() throws IOException {
         sql = new SQL();
+        sql.Connect();
         setUp();
     }
 
