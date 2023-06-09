@@ -22,8 +22,8 @@ abstract public class Abstract {
     public static ChromeOptions chromeOptions;
     public static WebDriverWait wait;
     public static Actions actions;
-    public SQL sql;
     public static String Count;
+    public SQL sql;
 
     public static void setUp() {
         WebDriverManager.chromedriver().setup();
@@ -42,6 +42,7 @@ abstract public class Abstract {
         sql = new SQL();
         sql.Connect();
         setUp();
+        sql.Connect();
     }
 
     public void WaitElement(By locator) {

@@ -35,6 +35,19 @@ public class JAVA extends Abstract {
     public String ID;
 
     @Test
+    public void TestBD() throws SQLException {
+
+        sql.StartConnection("Select * from yourtable.test where id = 15;");
+        while (sql.resultSet.next()){
+            String str = sql.resultSet.getString("name");
+            Assertions.assertEquals(str, "TEST", "Поле name не совпадает с ожидаемым результатом TEST");
+        }
+
+        sql.UpdateConnection("Update testBD set name = 'test' where id = 1;");
+        sql.UpdateConnection("Insert into testBD (name,qwerty) value ('флекс', '0925');");
+    }
+
+    @Test
     public void File() throws IOException {
 
         String text = "Это будет небольшой текст в переменной, нужен просто для проверки!";
