@@ -49,7 +49,6 @@ abstract public class Abstract {
         sql = new SQL();
         sql.Connect();
         setUp();
-        sql.Connect();
     }
 
     public void WaitElement(By locator) {
