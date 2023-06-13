@@ -11,12 +11,10 @@ import org.junit.jupiter.api.*;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.openqa.selenium.WebElement;
 
-import java.io.BufferedReader;
-import java.io.FileInputStream;
-import java.io.IOException;
-import java.io.InputStreamReader;
+import java.io.*;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.nio.file.StandardCopyOption;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -35,11 +33,43 @@ public class JAVA extends Abstract {
     public String ID;
 
     @Test
+    public void File2() throws IOException, InterruptedException {
+
+        //ReplaceMethod("File/test.txt", "текст", "ТЕКСТ");
+        //ReplaceMethod("File/test.txt", "небольшой", "НЕБОЛЬШОЙ");
+
+        ReplaceWordMethod("File/test.txt", "просто", "ПРОСТО");
+
+        String text1 = new String(Files.readAllBytes(Paths.get("File/test.txt")));
+
+        JsonPath response = given()
+                .filter(new AllureRestAssured())
+                .log().all()
+                .contentType(ContentType.JSON)
+                .when()
+                .body("{\n" +
+                        "    \"firstname\" : \""+text1+"\",\n" +
+                        "    \"lastname\" : \"Тестович\",\n" +
+                        "    \"totalprice\" : 150,\n" +
+                        "    \"depositpaid\" : true,\n" +
+                        "    \"bookingdates\" : {\n" +
+                        "        \"checkin\" : \"2018-01-01\",\n" +
+                        "        \"checkout\" : \"2019-01-01\"\n" +
+                        "    },\n" +
+                        "    \"additionalneeds\" : \"Тестирование\"\n" +
+                        "}")
+                .post("https://restful-booker.herokuapp.com/booking")
+                .prettyPeek()
+                .body()
+                .jsonPath();
+    }
+
+    @Test
     public void File() throws IOException {
 
         String text = "Это будет небольшой текст в переменной, нужен просто для проверки!";
 
-        String text1 = new String(Files.readAllBytes(Paths.get("File/test.txt")));;
+        String text1 = new String(Files.readAllBytes(Paths.get("File/test.txt")));
         String newStr = text1.replace("проверки", "ПРОВЕРКИ");
         String newStr1 = newStr.replace("небольшой", "НЕБОЛЬШОЙ");
         System.out.println(newStr1);

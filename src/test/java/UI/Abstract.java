@@ -13,6 +13,13 @@ import org.openqa.selenium.support.events.EventFiringWebDriver;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.io.*;
+import java.nio.charset.Charset;
+import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.nio.file.StandardCopyOption;
+import java.util.Properties;
 
 import static org.openqa.selenium.support.ui.ExpectedConditions.visibilityOfElementLocated;
 
@@ -67,5 +74,31 @@ abstract public class Abstract {
         JavascriptExecutor js = (JavascriptExecutor) driver;
         WebElement shadowDom = (WebElement) js.executeScript("return arguments[0].shadowRoot", element);
         return shadowDom;
+    }
+
+    public void ReplaceMethod (String File, String Word, String Replace) throws IOException {
+        File file = new File(File);
+        File fileWrite = new File("File/testWrite.txt");
+
+        BufferedReader br = new BufferedReader(new FileReader(file));
+        BufferedWriter bw = new BufferedWriter(new FileWriter(fileWrite));
+        String ln;
+        while((ln = br.readLine()) != null) {
+            bw.write(ln.replace(Word, Replace)
+            );
+        }
+        br.close();
+        bw.close();
+        Files.move(fileWrite.toPath(), file.toPath(), StandardCopyOption.REPLACE_EXISTING);
+    }
+
+    public void ReplaceWordMethod(String File, String Word, String Replace) throws IOException, InterruptedException {
+        Charset charset = StandardCharsets.UTF_8;
+        Path path = Paths.get(File);
+        Files.write(
+                path,
+                new String(Files.readAllBytes(path), charset).replace(Word, Replace)
+                        .getBytes(charset)
+        );
     }
 }
