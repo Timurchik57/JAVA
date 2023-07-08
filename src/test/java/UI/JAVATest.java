@@ -25,17 +25,15 @@ import static io.restassured.RestAssured.given;
 @ExtendWith(TestListenerApi.class)
 @Epic("Тесты на вебе")
 @Feature("Тесты на сайте IDEA")
-public class JAVA extends Abstract {
+public class JAVATest extends Abstract {
 
     OpenYandex openYandex;
     IDEA idea;
     public String ID;
+    public String Text = System.getProperty("TextMvn");;
 
     @Test
     public void File2() throws IOException, InterruptedException {
-
-        //ReplaceMethod("File/test.txt", "текст", "ТЕКСТ");
-        //ReplaceMethod("File/test.txt", "небольшой", "НЕБОЛЬШОЙ");
 
         ReplaceWordMethod("File/test.txt", "просто", "ПРОСТО");
 
@@ -47,7 +45,7 @@ public class JAVA extends Abstract {
                 .contentType(ContentType.JSON)
                 .when()
                 .body("{\n" +
-                        "    \"firstname\" : \""+text1+"\",\n" +
+                        "    \"firstname\" : \""+Text+"\",\n" +
                         "    \"lastname\" : \"Тестови\",\n" +
                         "    \"totalprice\" : 150,\n" +
                         "    \"depositpaid\" : true,\n" +
@@ -61,7 +59,7 @@ public class JAVA extends Abstract {
                 .prettyPeek()
                 .body()
                 .jsonPath();
-        Assertions.assertEquals(response.get("booking.lastname"), "Тестович", "lastname е совпадает с Тестович");
+        Assertions.assertEquals(response.get("booking.lastname"), "Тестови", "lastname е совпадает с Тестович");
     }
 
     @Test
