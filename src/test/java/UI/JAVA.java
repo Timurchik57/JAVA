@@ -14,16 +14,15 @@ import org.openqa.selenium.WebElement;
 import java.io.*;
 import java.nio.file.Files;
 import java.nio.file.Paths;
-import java.nio.file.StandardCopyOption;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
+
 import java.util.List;
 
 import static io.restassured.RestAssured.given;
 
 @ExtendWith(TestListener.class)
+@ExtendWith(TestListenerApi.class)
 @Epic("Тесты на вебе")
 @Feature("Тесты на сайте IDEA")
 public class JAVA extends Abstract {
@@ -49,7 +48,7 @@ public class JAVA extends Abstract {
                 .when()
                 .body("{\n" +
                         "    \"firstname\" : \""+text1+"\",\n" +
-                        "    \"lastname\" : \"Тестович\",\n" +
+                        "    \"lastname\" : \"Тестови\",\n" +
                         "    \"totalprice\" : 150,\n" +
                         "    \"depositpaid\" : true,\n" +
                         "    \"bookingdates\" : {\n" +
@@ -62,6 +61,7 @@ public class JAVA extends Abstract {
                 .prettyPeek()
                 .body()
                 .jsonPath();
+        Assertions.assertEquals(response.get("booking.lastname"), "Тестович", "lastname е совпадает с Тестович");
     }
 
     @Test
