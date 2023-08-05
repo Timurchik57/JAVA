@@ -26,8 +26,8 @@ import static org.openqa.selenium.support.ui.ExpectedConditions.visibilityOfElem
 
 abstract public class Abstract {
 
-    public static EventFiringWebDriver driver;
-   // public static RemoteWebDriver driver;
+    //public static EventFiringWebDriver driver;
+    public static RemoteWebDriver driver;
     public static ChromeOptions chromeOptions;
     public static WebDriverWait wait;
     public static Actions actions;
@@ -39,10 +39,10 @@ abstract public class Abstract {
         chromeOptions = new ChromeOptions();
         chromeOptions.setHeadless(true);
         chromeOptions.addArguments("window-size=1920, 1080");
-        //driver = new RemoteWebDriver(new URL("http://localhost:4445/wd/hub"), chromeOptions);
-        driver = new EventFiringWebDriver(new ChromeDriver(chromeOptions));
+        driver = new RemoteWebDriver(new URL("http://localhost:4445/wd/hub"), chromeOptions);
+        //driver = new EventFiringWebDriver(new ChromeDriver(chromeOptions));
         //driver.manage().window().maximize();
-        driver.register(new Custom());
+       // driver.register(new Custom());
         wait = new WebDriverWait(driver, 20);
         actions = new Actions(driver);
     }
