@@ -32,10 +32,12 @@ public class JAVATest extends Abstract {
     public String ID;
     public String Text = System.getProperty("TextMvn");
 
+
     @Test
-    public void TestBranches() {
-        System.out.println("Проверяем изменения с ветками");
+    public void TestBranches2() {
+        System.out.println("Добавили абсолютно новый тест");
     }
+
         @Test
     public void File2() throws IOException, InterruptedException {
 
