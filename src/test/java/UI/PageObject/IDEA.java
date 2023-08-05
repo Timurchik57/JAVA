@@ -5,18 +5,19 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.remote.RemoteWebDriver;
 import org.openqa.selenium.support.PageFactory;
+import org.openqa.selenium.support.events.EventFiringWebDriver;
 
 public class IDEA extends Abstract {
 
-//    public IDEA(WebDriver driver) {
-//        this.driver = (EventFiringWebDriver) driver;
-//        PageFactory.initElements(driver, this);
-//    }
-
     public IDEA(WebDriver driver) {
-        Abstract.driver = (RemoteWebDriver) driver;
+        this.driver = (EventFiringWebDriver) driver;
         PageFactory.initElements(driver, this);
     }
+
+//    public IDEA(WebDriver driver) {
+//        Abstract.driver = (RemoteWebDriver) driver;
+//        PageFactory.initElements(driver, this);
+//    }
 
     /** URL - главаная страница */
     public String Idea = "https://www.jetbrains.com/idea/";
