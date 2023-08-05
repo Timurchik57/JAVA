@@ -30,9 +30,14 @@ public class JAVATest extends Abstract {
     OpenYandex openYandex;
     IDEA idea;
     public String ID;
-    public String Text = System.getProperty("TextMvn");;
+    public String Text = System.getProperty("TextMvn");
 
     @Test
+    public void TestBranches() {
+        System.out.println("Проверяем изменения с ветками");
+    }
+
+        @Test
     public void File2() throws IOException, InterruptedException {
 
         ReplaceWordMethod("File/test.txt", "просто", "ПРОСТО");
