@@ -32,10 +32,13 @@ public class JAVATest extends Abstract {
     public String ID;
     public String Text = System.getProperty("TextMvn");
 
-    public void TestBranches() throws IOException, InterruptedException {
-        System.out.println("Добавили пустой тест");
+    @Test
+    @DisplayName("Тест для проверки Cherry-Pick")
+    public void TestBranches() {
+        System.out.println("Тест для проверки Cherry-Pick");
     }
-        @Test
+
+    @Test
     public void File2() throws IOException, InterruptedException {
 
         ReplaceWordMethod("File/test.txt", "просто", "ПРОСТО");
