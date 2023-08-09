@@ -8,6 +8,7 @@ import org.openqa.selenium.*;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.interactions.Actions;
+import org.openqa.selenium.remote.LocalFileDetector;
 import org.openqa.selenium.remote.RemoteWebDriver;
 import org.openqa.selenium.support.events.EventFiringWebDriver;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -33,13 +34,15 @@ abstract public class Abstract {
     public static Actions actions;
     public static String Count;
     public SQL sql;
+    public static String remote_url_chrome = System.getProperty("UrlChrome");
 
     public static void setUp() throws MalformedURLException {
         WebDriverManager.chromedriver().setup();
         chromeOptions = new ChromeOptions();
         chromeOptions.setHeadless(true);
         chromeOptions.addArguments("window-size=1920, 1080");
-        driver = new RemoteWebDriver(new URL("http://localhost:4445/wd/hub"), chromeOptions);
+        driver = new RemoteWebDriver(new URL(remote_url_chrome), chromeOptions);
+        driver.setFileDetector(new LocalFileDetector());
        // driver = new EventFiringWebDriver(new ChromeDriver(chromeOptions));
         //driver.manage().window().maximize();
        // driver.register(new Custom());
@@ -54,6 +57,7 @@ abstract public class Abstract {
         setUp();
     }
 
+    @Step("Ожидание появления элемента")
     public void WaitElement(By locator) {
         wait.until(visibilityOfElementLocated(locator));
     }
@@ -67,18 +71,21 @@ abstract public class Abstract {
         element.click();
     }
 
+    @Step("Ввод текста в Shadow root")
     public static void inputWord(WebElement element, String word) {
         JavascriptExecutor js = (JavascriptExecutor) driver;
         js.executeScript("arguments[0].value='"+word+"'", element);
         element.sendKeys(Keys.BACK_SPACE);
     }
 
+    @Step("Возвращает значение из Shadow root")
     public static WebElement getShadow(WebElement element, WebDriver driver) {
         JavascriptExecutor js = (JavascriptExecutor) driver;
         WebElement shadowDom = (WebElement) js.executeScript("return arguments[0].shadowRoot", element);
         return shadowDom;
     }
 
+    @Step("Замена текста в Файле")
     public void ReplaceMethod (String File, String Word, String Replace) throws IOException {
         File file = new File(File);
         File fileWrite = new File("File/testWrite.txt");
@@ -95,6 +102,7 @@ abstract public class Abstract {
         Files.move(fileWrite.toPath(), file.toPath(), StandardCopyOption.REPLACE_EXISTING);
     }
 
+    @Step("Замена текста в файле 2 способ")
     public void ReplaceWordMethod(String File, String Word, String Replace) throws IOException, InterruptedException {
         Charset charset = StandardCharsets.UTF_8;
         Path path = Paths.get(File);
