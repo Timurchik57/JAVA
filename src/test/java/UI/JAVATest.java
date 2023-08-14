@@ -35,6 +35,7 @@ public class JAVATest extends Abstract {
     @Test
     @DisplayName("Тест для проверки Cherry-Pick")
     public void TestBranches() {
+        //Захотел добавить этот текст локально
         System.out.println("Тест для проверки Cherry-Pick");
     }
 
