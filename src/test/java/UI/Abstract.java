@@ -5,12 +5,10 @@ import io.github.bonigarcia.wdm.WebDriverManager;
 import io.qameta.allure.Step;
 import org.junit.jupiter.api.BeforeEach;
 import org.openqa.selenium.*;
-import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.remote.LocalFileDetector;
 import org.openqa.selenium.remote.RemoteWebDriver;
-import org.openqa.selenium.support.events.EventFiringWebDriver;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.io.*;
@@ -57,7 +55,7 @@ abstract public class Abstract {
         setUp();
     }
 
-    @Step("Ожидание появления элемента")
+    @Step("Ожидание появления эдемента {0}")
     public void WaitElement(By locator) {
         wait.until(visibilityOfElementLocated(locator));
     }
@@ -71,7 +69,7 @@ abstract public class Abstract {
         element.click();
     }
 
-    @Step("Ввод текста в Shadow root")
+    @Step("Ввод текста под Shadow root")
     public static void inputWord(WebElement element, String word) {
         JavascriptExecutor js = (JavascriptExecutor) driver;
         js.executeScript("arguments[0].value='"+word+"'", element);
