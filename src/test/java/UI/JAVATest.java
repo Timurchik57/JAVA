@@ -37,6 +37,7 @@ public class JAVATest extends Abstract {
     public void TestBranches() {
         //Захотел добавить этот текст локально
         System.out.println("Тест для проверки Cherry-Pick");
+        System.out.println("Для 10 урока по Git");
     }
 
     @Test
