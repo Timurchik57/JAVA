@@ -5,10 +5,12 @@ import io.github.bonigarcia.wdm.WebDriverManager;
 import io.qameta.allure.Step;
 import org.junit.jupiter.api.BeforeEach;
 import org.openqa.selenium.*;
+import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.remote.LocalFileDetector;
 import org.openqa.selenium.remote.RemoteWebDriver;
+import org.openqa.selenium.support.events.EventFiringWebDriver;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.io.*;
@@ -25,7 +27,7 @@ import static org.openqa.selenium.support.ui.ExpectedConditions.visibilityOfElem
 
 abstract public class Abstract {
 
-   // public static EventFiringWebDriver driver;
+   //public static EventFiringWebDriver driver;
     public static RemoteWebDriver driver;
     public static ChromeOptions chromeOptions;
     public static WebDriverWait wait;

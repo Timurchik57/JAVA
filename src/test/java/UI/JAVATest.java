@@ -145,14 +145,14 @@ public class JAVATest extends Abstract {
             list.add(WebList.get(i).getText());
         }
 
-//        List<String> listSql = new ArrayList<>();
-//        sql.StartConnection("Select * from yourtable.test where id = 20259;");
-//        while (sql.resultSet.next()) {
-//            String str = sql.resultSet.getString("name");
-//            listSql.add(str);
-//        }
-//
-//        Assertions.assertEquals(list, listSql, "Значения на вебе и в БД не совпадают");
+        List<String> listSql = new ArrayList<>();
+        sql.StartConnection("Select * from yourtable.test where id = 20259;");
+        while (sql.resultSet.next()) {
+            String str = sql.resultSet.getString("name");
+            listSql.add(str);
+        }
+
+        Assertions.assertEquals(list, listSql, "Значения на вебе и в БД не совпадают");
     }
 
     @Test
