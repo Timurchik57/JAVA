@@ -73,14 +73,14 @@ abstract public class Abstract {
         element.sendKeys(Keys.BACK_SPACE);
     }
 
-    @Step("Возврат текста из под Shadow root")
+    @Step("Возвращает значение из Shadow root")
     public static WebElement getShadow(WebElement element, WebDriver driver) {
         JavascriptExecutor js = (JavascriptExecutor) driver;
         WebElement shadowDom = (WebElement) js.executeScript("return arguments[0].shadowRoot", element);
         return shadowDom;
     }
 
-    @Step("Замена текста в файле")
+    @Step("Замена текста в Файле")
     public void ReplaceMethod (String File, String Word, String Replace) throws IOException {
         File file = new File(File);
         File fileWrite = new File("File/testWrite.txt");
@@ -97,7 +97,7 @@ abstract public class Abstract {
         Files.move(fileWrite.toPath(), file.toPath(), StandardCopyOption.REPLACE_EXISTING);
     }
 
-    @Step("Замена текста в файле - 2 вариант")
+    @Step("Замена текста в файле 2 способ")
     public void ReplaceWordMethod(String File, String Word, String Replace) throws IOException, InterruptedException {
         Charset charset = StandardCharsets.UTF_8;
         Path path = Paths.get(File);
