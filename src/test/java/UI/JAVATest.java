@@ -32,6 +32,45 @@ public class JAVATest extends Abstract {
     public String ID;
     public String Text = System.getProperty("TextMvn");
 
+
+    @Test
+    @DisplayName("Тест для проверки отправки файла")
+    public void NewTestUser1() {
+        //Мы добавили новый тест с первого аккаунта
+    }
+
+
+    @Test
+    @DisplayName("Тест для проверки отправки файла")
+    public void TestFileAdd() throws IOException {
+
+        String str = new String(Files.readAllBytes(Paths.get("File/file.txt")));
+        String str2 = str.replace("текст", "Проверка");
+        String str3 = str.replace("файла", "ФАЙЛА");
+
+        JsonPath response = given()
+                .filter(new AllureRestAssured())
+                .log().all()
+                .contentType(ContentType.JSON)
+                .when()
+                .body("{\n" +
+                        "    \"firstname\" : \""+str3+"\",\n" +
+                        "    \"lastname\" : \"Тестови\",\n" +
+                        "    \"totalprice\" : 150,\n" +
+                        "    \"depositpaid\" : true,\n" +
+                        "    \"bookingdates\" : {\n" +
+                        "        \"checkin\" : \"2018-01-01\",\n" +
+                        "        \"checkout\" : \"2019-01-01\"\n" +
+                        "    },\n" +
+                        "    \"additionalneeds\" : \"Тестирование\"\n" +
+                        "}")
+                .post("https://restful-booker.herokuapp.com/booking")
+                .prettyPeek()
+                .body()
+                .jsonPath();
+        Assertions.assertEquals(response.get("booking.lastname"), "Тестови", "lastname е совпадает с Тестович");
+    }
+
     @Test
     @DisplayName("Тест для проверки Cherry-Pick")
     public void TestBranches() {
@@ -148,14 +187,14 @@ public class JAVATest extends Abstract {
             list.add(WebList.get(i).getText());
         }
 
-//        List<String> listSql = new ArrayList<>();
-//        sql.StartConnection("Select * from yourtable.test where id = 20259;");
-//        while (sql.resultSet.next()) {
-//            String str = sql.resultSet.getString("name");
-//            listSql.add(str);
-//        }
-//
-//        Assertions.assertEquals(list, listSql, "Значения на вебе и в БД не совпадают");
+        List<String> listSql = new ArrayList<>();
+        sql.StartConnection("Select * from yourtable.test where id = 20259;");
+        while (sql.resultSet.next()) {
+            String str = sql.resultSet.getString("name");
+            listSql.add(str);
+        }
+
+        Assertions.assertEquals(list, listSql, "Значения на вебе и в БД не совпадают");
     }
 
     @Test
