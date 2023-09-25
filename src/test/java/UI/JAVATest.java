@@ -32,14 +32,13 @@ public class JAVATest extends Abstract {
     public String ID;
     public String Text = System.getProperty("TextMvn");
 
-
     @Test
     @DisplayName("Тест для проверки отправки файла")
     public void NewTestUser1() {
         //Мы добавили новый тест с первого аккаунта
         //Мы добавили новый тест со второго аккаунта
+        //Мы добавили 3 тест с первого аккаунта
     }
-
 
     @Test
     @DisplayName("Тест для проверки отправки файла")
