@@ -35,6 +35,13 @@ public class JAVATest extends Abstract {
 
     @Test
     @DisplayName("Тест для проверки отправки файла")
+    public void NewTestUser1() {
+        //Мы добавили новый тест с первого аккаунта
+    }
+
+
+    @Test
+    @DisplayName("Тест для проверки отправки файла")
     public void TestFileAdd() throws IOException {
 
         String str = new String(Files.readAllBytes(Paths.get("File/file.txt")));
