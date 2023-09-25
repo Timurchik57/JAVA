@@ -20,7 +20,7 @@
         <allure-maven.version>2.11.2</allure-maven.version>
         <reportVersion.version>2.4.1</reportVersion.version>
         <selenium-java.version>3.141.59</selenium-java.version>
-        <webdrivermanager.version>5.1.0</webdrivermanager.version>
+        <webdrivermanager.version>5.5.3</webdrivermanager.version>
         <slf4j-simple.version>1.7.30</slf4j-simple.version>
         <allure.results.directory>target/allure-results</allure.results.directory>
     </properties>
@@ -34,8 +34,8 @@
                 <configuration>
                     <argLine>
                         -javaagent:"${settings.localRepository}/org/aspectj/aspectjweaver/${aspectj.version}/aspectjweaver-${aspectj.version}.jar"
+                        -Dfile.encoding=UTF-8
                     </argLine>
-                    <argLine>-Dfile.encoding=UTF-8</argLine>
                 </configuration>
                 <dependencies>
                     <dependency>

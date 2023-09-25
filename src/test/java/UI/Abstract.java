@@ -8,13 +8,11 @@ import org.openqa.selenium.*;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.interactions.Actions;
-import org.openqa.selenium.remote.RemoteWebDriver;
 import org.openqa.selenium.support.events.EventFiringWebDriver;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.io.*;
 import java.net.MalformedURLException;
-import java.net.URL;
 import java.nio.charset.Charset;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
@@ -41,7 +39,7 @@ abstract public class Abstract {
         chromeOptions.addArguments("window-size=1920, 1080");
         //driver = new RemoteWebDriver(new URL("http://localhost:4445/wd/hub"), chromeOptions);
         driver = new EventFiringWebDriver(new ChromeDriver(chromeOptions));
-        driver.manage().window().maximize();
+        //driver.manage().window().maximize();
         driver.register(new Custom());
         wait = new WebDriverWait(driver, 20);
         actions = new Actions(driver);
@@ -75,14 +73,14 @@ abstract public class Abstract {
         element.sendKeys(Keys.BACK_SPACE);
     }
 
-    @Step("Возврат текста из под Shadow root")
+    @Step("Возвращает значение из Shadow root")
     public static WebElement getShadow(WebElement element, WebDriver driver) {
         JavascriptExecutor js = (JavascriptExecutor) driver;
         WebElement shadowDom = (WebElement) js.executeScript("return arguments[0].shadowRoot", element);
         return shadowDom;
     }
 
-    @Step("Замена текста в файле")
+    @Step("Замена текста в Файле")
     public void ReplaceMethod (String File, String Word, String Replace) throws IOException {
         File file = new File(File);
         File fileWrite = new File("File/testWrite.txt");
@@ -99,7 +97,7 @@ abstract public class Abstract {
         Files.move(fileWrite.toPath(), file.toPath(), StandardCopyOption.REPLACE_EXISTING);
     }
 
-    @Step("Замена текста в файле - 2 вариант")
+    @Step("Замена текста в файле 2 способ")
     public void ReplaceWordMethod(String File, String Word, String Replace) throws IOException, InterruptedException {
         Charset charset = StandardCharsets.UTF_8;
         Path path = Paths.get(File);
