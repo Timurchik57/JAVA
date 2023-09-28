@@ -14,6 +14,7 @@ import org.openqa.selenium.WebElement;
 import java.io.*;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.nio.file.StandardCopyOption;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
@@ -44,9 +45,9 @@ public class JAVATest extends Abstract {
     @DisplayName("Тест для проверки отправки файла")
     public void TestFileAdd() throws IOException {
 
-        String str = new String(Files.readAllBytes(Paths.get("File/file.txt")));
-        String str2 = str.replace("текст", "Проверка");
-        String str3 = str.replace("файла", "ФАЙЛА");
+        ReplaceWordMethod("File/file.txt", "через", "ЧЕРЕЗ");
+
+        String text = new String(Files.readAllBytes(Paths.get("File/file.txt")));
 
         JsonPath response = given()
                 .filter(new AllureRestAssured())
@@ -54,7 +55,7 @@ public class JAVATest extends Abstract {
                 .contentType(ContentType.JSON)
                 .when()
                 .body("{\n" +
-                        "    \"firstname\" : \""+str3+"\",\n" +
+                        "    \"firstname\" : \""+text+"\",\n" +
                         "    \"lastname\" : \"Тестови\",\n" +
                         "    \"totalprice\" : 150,\n" +
                         "    \"depositpaid\" : true,\n" +
