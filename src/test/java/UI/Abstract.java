@@ -98,7 +98,7 @@ abstract public class Abstract {
     }
 
     @Step("Замена текста в файле 2 способ")
-    public void ReplaceWordMethod(String File, String Word, String Replace) throws IOException, InterruptedException {
+    public void ReplaceWordMethod(String File, String Word, String Replace) throws IOException {
         Charset charset = StandardCharsets.UTF_8;
         Path path = Paths.get(File);
         Files.write(
