@@ -34,6 +34,18 @@ public class JAVATest extends Abstract {
     public String Text = System.getProperty("TextMvn");
 
     @Test
+    @DisplayName("Тест для проверки универсального локатора")
+    public void UniversalLocator() {
+
+        idea = new IDEA(driver);
+        driver.get(idea.Idea);
+        ClickElement(idea.DeveloperTools);
+        ClickElement(idea.IDEs("Aqua"));
+        driver.navigate().back();
+        ClickElement(idea.IDEs("CLion"));
+    }
+
+    @Test
     @DisplayName("Тест для проверки отправки файла")
     public void NewTestUser1() {
         //Мы добавили новый тест с первого аккаунта
