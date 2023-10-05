@@ -22,8 +22,8 @@ import java.util.List;
 
 import static io.restassured.RestAssured.given;
 
+@ExtendWith(TestlistnerApi.class)
 @ExtendWith(TestListener.class)
-@ExtendWith(TestListenerApi.class)
 @Epic("Тесты на вебе")
 @Feature("Тесты на сайте IDEA")
 public class JAVATest extends Abstract {
@@ -58,7 +58,6 @@ public class JAVATest extends Abstract {
     public void TestFileAdd() throws IOException {
 
         ReplaceWordMethod("File/file.txt", "через", "ЧЕРЕЗ");
-
         String text = new String(Files.readAllBytes(Paths.get("File/file.txt")));
 
         JsonPath response = given()
@@ -82,6 +81,7 @@ public class JAVATest extends Abstract {
                 .body()
                 .jsonPath();
         Assertions.assertEquals(response.get("booking.lastname"), "Тестови", "lastname е совпадает с Тестович");
+
     }
 
     @Test
