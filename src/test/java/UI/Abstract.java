@@ -28,6 +28,8 @@ abstract public class Abstract {
     //public static RemoteWebDriver driver;
     public static ChromeOptions chromeOptions;
     public static WebDriverWait wait;
+    public static WebDriverWait waitTime;
+    public static WebDriverWait waitTime2;
     public static Actions actions;
     public static String Count;
     public SQL sql;
@@ -35,11 +37,11 @@ abstract public class Abstract {
     public static void setUp() throws MalformedURLException {
         WebDriverManager.chromedriver().setup();
         chromeOptions = new ChromeOptions();
-        chromeOptions.setHeadless(true);
-        chromeOptions.addArguments("window-size=1920, 1080");
+        //chromeOptions.setHeadless(true);
+        //chromeOptions.addArguments("window-size=1920, 1080");
         //driver = new RemoteWebDriver(new URL("http://localhost:4445/wd/hub"), chromeOptions);
         driver = new EventFiringWebDriver(new ChromeDriver(chromeOptions));
-        //driver.manage().window().maximize();
+        driver.manage().window().maximize();
         driver.register(new Custom());
         wait = new WebDriverWait(driver, 20);
         actions = new Actions(driver);
@@ -52,9 +54,24 @@ abstract public class Abstract {
         setUp();
     }
 
+    @Step("Ожидание появления эдемента {0}, за время - {1}")
+    public void WaitElementTime(By locator, Integer time) {
+        waitTime = new WebDriverWait(driver, time);
+        waitTime.until(visibilityOfElementLocated(locator));
+    }
+
     @Step("Ожидание появления эдемента {0}")
     public void WaitElement(By locator) {
         wait.until(visibilityOfElementLocated(locator));
+    }
+
+    @Step("Нажимаем на элемент с ожиданием по вемени")
+    public void ClickElementTime(By locator, Integer time) {
+        WaitElementTime(locator, time);
+        WebElement element = driver.findElement(locator);
+        actions.moveToElement(element);
+        actions.perform();
+        element.click();
     }
 
     @Step("Нажимаем на элемент")

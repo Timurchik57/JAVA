@@ -3,7 +3,6 @@ package UI;
 import UI.PageObject.IDEA;
 import UI.PageObject.OpenYandex;
 import io.qameta.allure.*;
-
 import io.qameta.allure.restassured.AllureRestAssured;
 import io.restassured.http.ContentType;
 import io.restassured.path.json.JsonPath;
@@ -14,7 +13,6 @@ import org.openqa.selenium.WebElement;
 import java.io.*;
 import java.nio.file.Files;
 import java.nio.file.Paths;
-import java.nio.file.StandardCopyOption;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
@@ -32,6 +30,15 @@ public class JAVATest extends Abstract {
     IDEA idea;
     public String ID;
     public String Text = System.getProperty("TextMvn");
+
+    @Test
+    @DisplayName("Тест для проверки Явного ожидания Wait")
+    public void WaitTest() {
+
+        idea = new IDEA(driver);
+        driver.get(idea.Idea);
+        ClickElementTime(idea.DeveloperTools, 5);
+    }
 
     @Test
     @DisplayName("Тест для проверки универсального локатора")
