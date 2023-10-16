@@ -11,14 +11,12 @@ public class TestlistnerApi implements TestWatcher {
     @SneakyThrows
     @Override
     public void testFailed(ExtensionContext context, Throwable cause) {
-        System.out.println("Отработал метод полсе падения теста");
         javaTest.ReplaceWordMethod("File/file.txt", "ЧЕРЕЗ", "через");
     }
 
     @SneakyThrows
     @Override
     public void testSuccessful(ExtensionContext context) {
-        System.out.println("Отработал метод полсе успеха теста");
         javaTest.ReplaceWordMethod("File/file.txt", "ЧЕРЕЗ", "через");
     }
 }
