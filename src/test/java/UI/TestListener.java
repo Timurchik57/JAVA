@@ -11,8 +11,6 @@ import org.openqa.selenium.logging.LogType;
 
 public class TestListener implements TestWatcher {
 
-    JAVATest javaTest = new JAVATest();
-
     @SneakyThrows
     @Override
     public void testFailed(ExtensionContext context, Throwable cause) {
