@@ -1,22 +1,15 @@
 package UI;
 
-import io.github.bonigarcia.wdm.WebDriverManager;
-import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
-import java.net.URL;
-import java.nio.file.Path;
-import java.time.Duration;
 import java.util.ArrayList;
 import java.util.List;
 @ExtendWith(TestListener.class)
-public class DockerTest extends Abstract {
+public class Docker extends Abstract {
 
 //    WebDriver driver;
 //    WebDriverManager wdm = WebDriverManager.chromedriver().browserInDocker().enableVnc().enableRecording();

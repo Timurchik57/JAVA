@@ -22,14 +22,14 @@ import static io.restassured.RestAssured.given;
 
 @ExtendWith(TestlistnerApi.class)
 @ExtendWith(TestListener.class)
-@Epic("Тесты на вебе")
+
 @Feature("Тесты на сайте IDEA")
 public class JAVATest extends Abstract {
 
     OpenYandex openYandex;
     IDEA idea;
     public String ID;
-    public String Text = System.getProperty("TextMvn");
+    public String TEXT = System.getProperty("TEST");
 
     @Test
     @DisplayName("Тест для проверки Явного ожидания Wait")
@@ -73,7 +73,7 @@ public class JAVATest extends Abstract {
                 .contentType(ContentType.JSON)
                 .when()
                 .body("{\n" +
-                        "    \"firstname\" : \""+text+"\",\n" +
+                        "    \"firstname\" : \"" + TEXT + "\",\n" +
                         "    \"lastname\" : \"Тестови\",\n" +
                         "    \"totalprice\" : 150,\n" +
                         "    \"depositpaid\" : true,\n" +
@@ -99,7 +99,6 @@ public class JAVATest extends Abstract {
         System.out.println("Для 10 урока по Git");
     }
 
-
     @Test
     public void File2() throws IOException, InterruptedException {
 
@@ -113,7 +112,7 @@ public class JAVATest extends Abstract {
                 .contentType(ContentType.JSON)
                 .when()
                 .body("{\n" +
-                        "    \"firstname\" : \""+Text+"\",\n" +
+                        "    \"firstname\" : \"" + text1 + "\",\n" +
                         "    \"lastname\" : \"Тестови\",\n" +
                         "    \"totalprice\" : 150,\n" +
                         "    \"depositpaid\" : true,\n" +
@@ -146,7 +145,7 @@ public class JAVATest extends Abstract {
                 .contentType(ContentType.JSON)
                 .when()
                 .body("{\n" +
-                        "    \"firstname\" : \""+newStr+"\",\n" +
+                        "    \"firstname\" : \"" + newStr + "\",\n" +
                         "    \"lastname\" : \"Тестович\",\n" +
                         "    \"totalprice\" : 150,\n" +
                         "    \"depositpaid\" : true,\n" +
@@ -179,7 +178,8 @@ public class JAVATest extends Abstract {
         String CssAttribute = driver.findElement(idea.Header).getCssValue("font-size");
 
         System.out.println("Первый тест");
-        Assertions.assertEquals(Attribute, "Navigate to Store", "Нужный атрибут не совпадает со значением Navigate to Store");
+        Assertions.assertEquals(Attribute, "Navigate to Store",
+                "Нужный атрибут не совпадает со значением Navigate to Store");
 
         System.out.println("Второй тест");
         Assertions.assertEquals(CssAttribute, "72px", "Нужный атрибут не совпадает со значением CSS ");
@@ -261,7 +261,6 @@ public class JAVATest extends Abstract {
         sql.UpdateConnection("Insert into testBD (name, qwerty) value ('алекс', '0987');");
     }
 
-
     @Test
     @DisplayName("Проверка по id")
     public void SuccessTest1() {
@@ -272,9 +271,9 @@ public class JAVATest extends Abstract {
                 .contentType(ContentType.JSON)
                 .when()
                 .body("{\n" +
-                              "    \"name\": \"Ivan\",\n" +
-                              "    \"job\": \"Ivanov\"\n" +
-                              "}")
+                        "    \"name\": \"Ivan\",\n" +
+                        "    \"job\": \"Ivanov\"\n" +
+                        "}")
                 .post("https://reqres.in/api/users")
                 .prettyPeek()
                 .body()
