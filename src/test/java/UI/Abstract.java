@@ -54,7 +54,19 @@ abstract public class Abstract {
         setUp();
     }
 
-    @Step("Ожидание появления эдемента {0}, за время - {1}")
+    @Step("Проверка появится ли элемент {0}, за время - {1}")
+    public boolean IfWaitElement(By locator, Integer time) {
+        waitTime = new WebDriverWait(driver, time);
+        try {
+            waitTime.until(visibilityOfElementLocated(locator));
+            return true;
+        } catch (TimeoutException e) {
+            System.out.println("Элемент отсутствует на странице");
+            return false;
+        }
+    }
+
+    @Step("Ожидание появления элемента {0}, за время - {1}")
     public void WaitElementTime(By locator, Integer time) {
         waitTime = new WebDriverWait(driver, time);
         waitTime.until(visibilityOfElementLocated(locator));

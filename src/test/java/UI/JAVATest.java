@@ -8,6 +8,7 @@ import io.restassured.http.ContentType;
 import io.restassured.path.json.JsonPath;
 import org.junit.jupiter.api.*;
 import org.junit.jupiter.api.extension.ExtendWith;
+import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebElement;
 
 import java.io.*;
@@ -30,6 +31,20 @@ public class JAVATest extends Abstract {
     IDEA idea;
     public String ID;
     public String TEXT = System.getProperty("TEST");
+
+    @Test
+    @DisplayName("Тест для проверки Явного ожидания Wait. Часть 2")
+    public void WaitTest2() {
+
+        idea = new IDEA(driver);
+        driver.get(idea.Idea);
+
+        if (IfWaitElement(idea.IDEs("CLion"), 1)) {
+            System.out.println("Элемент обнаружен на странице выполняем следующий перечень действий");
+        } else {
+            System.out.println("Элемент НЕ обнаружен на странице выполняем следующий перечень действий");
+        }
+    }
 
     @Test
     @DisplayName("Тест для проверки Явного ожидания Wait")
