@@ -8,17 +8,20 @@ import org.openqa.selenium.*;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.interactions.Actions;
+import org.openqa.selenium.remote.RemoteWebDriver;
 import org.openqa.selenium.support.events.EventFiringWebDriver;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.io.*;
 import java.net.MalformedURLException;
+import java.net.URL;
 import java.nio.charset.Charset;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
+import java.util.Properties;
 
 import static org.openqa.selenium.support.ui.ExpectedConditions.visibilityOfElementLocated;
 
@@ -31,7 +34,7 @@ abstract public class Abstract {
     public static WebDriverWait waitTime;
     public static WebDriverWait waitTime2;
     public static Actions actions;
-    public static String Count;
+    public Properties props;
     public SQL sql;
 
     public static void setUp() throws MalformedURLException {
@@ -41,17 +44,35 @@ abstract public class Abstract {
         chromeOptions.addArguments("window-size=1920, 1080");
         //driver = new RemoteWebDriver(new URL("http://localhost:4445/wd/hub"), chromeOptions);
         driver = new EventFiringWebDriver(new ChromeDriver(chromeOptions));
-        //driver.manage().window().maximize();
+       // driver.manage().window().maximize();
         driver.register(new Custom());
         wait = new WebDriverWait(driver, 20);
         actions = new Actions(driver);
+
     }
 
     @BeforeEach
     public void init() throws IOException {
         sql = new SQL();
         sql.Connect();
+
+        FileInputStream in = new FileInputStream("src/test/resources/my.properties");
+        props = new Properties();
+        props.load(in);
+        in.close();
         setUp();
+    }
+
+    @Step("Запись в Properties переменной {1} = {2}")
+    public static void InputProp(String FileName, String NameProp, String Input) throws IOException {
+        FileInputStream in = new FileInputStream(FileName);
+        Properties props = new Properties();
+        props.load(in);
+        in.close();
+        FileOutputStream out = new FileOutputStream(FileName);
+        props.setProperty(NameProp, Input);
+        props.store(out, null);
+        out.close();
     }
 
     @Step("Проверка появится ли элемент {0}, за время - {1}")
