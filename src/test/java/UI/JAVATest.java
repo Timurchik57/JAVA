@@ -9,6 +9,7 @@ import io.restassured.http.ContentType;
 import io.restassured.path.json.JsonPath;
 import org.junit.jupiter.api.*;
 import org.junit.jupiter.api.extension.ExtendWith;
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 
 import java.io.*;
@@ -122,7 +123,8 @@ public class JAVATest extends Abstract {
         System.out.println("Второй тест");
         Assertions.assertEquals(CssAttribute, "72px", "Нужный атрибут не совпадает со значением CSS ");
 
-        Thread.sleep(30000);
+        File file = new File("src/test/resources/test.txt");
+        driver.findElement(By.xpath("(//input[@type='file'])[1]")).sendKeys(file.getAbsolutePath());
     }
 
     @Issue(value = "TEL-124")
