@@ -18,12 +18,13 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 
 import java.util.List;
+import java.util.Properties;
 
 import static io.restassured.RestAssured.given;
 
 @ExtendWith(TestlistnerApi.class)
 @ExtendWith(TestListener.class)
-
+@TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 @Feature("Тесты на сайте IDEA")
 public class JAVATest extends Abstract {
 
@@ -31,6 +32,33 @@ public class JAVATest extends Abstract {
     IDEA idea;
     public String ID;
     public String TEXT = System.getProperty("TEST");
+
+    @Test
+    @Order(1)
+    @DisplayName("Тест для проверки Properties")
+    public void Properties() throws IOException {
+        idea = new IDEA(driver);
+
+        driver.get(idea.Idea);
+        ClickElementTime(idea.DeveloperTools, 5);
+        String publicStr  = driver.findElement(idea.DeveloperToolsName).getText();
+
+        InputProp("src/test/resources/my.properties", "Name2", publicStr);
+
+        System.out.println(props.getProperty("Name2"));
+    }
+
+    @Test
+    @Order(2)
+    @DisplayName("Тест для проверки Properties 2")
+    public void Properties2() {
+        idea = new IDEA(driver);
+        driver.get(idea.Idea);
+
+        System.out.println(props.getProperty("Name"));
+    }
+
+
 
     @Test
     @DisplayName("Тест для проверки Явного ожидания Wait. Часть 2")
