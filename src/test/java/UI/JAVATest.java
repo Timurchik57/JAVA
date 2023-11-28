@@ -74,7 +74,7 @@ public class JAVATest extends Abstract {
 
         String text = "Это будет небольшой текст в переменной, нужен просто для проверки!";
 
-        String text1 = new String(Files.readAllBytes(Paths.get("File/test.txt")));
+        String text1 = new String(Files.readAllBytes(Paths.get("File/file.txt")));
         String newStr = text1.replace("проверки", "ПРОВЕРКИ");
         String newStr1 = newStr.replace("небольшой", "НЕБОЛЬШОЙ");
         System.out.println(newStr1);
