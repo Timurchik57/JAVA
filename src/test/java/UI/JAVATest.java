@@ -99,6 +99,7 @@ public class JAVATest extends Abstract {
                 .prettyPeek()
                 .body()
                 .jsonPath();
+        System.out.println("Привет");
     }
 
     @Issue(value = "TEL-123")
@@ -122,9 +123,6 @@ public class JAVATest extends Abstract {
 
         System.out.println("Второй тест");
         Assertions.assertEquals(CssAttribute, "72px", "Нужный атрибут не совпадает со значением CSS ");
-
-        File file = new File("src/test/resources/test.txt");
-        driver.findElement(By.xpath("(//input[@type='file'])[1]")).sendKeys(file.getAbsolutePath());
     }
 
     @Issue(value = "TEL-124")
