@@ -33,6 +33,5 @@ public class TestListener implements TestWatcher {
                 String.valueOf(driver.manage().logs().get(LogType.BROWSER).getAll()));
         WebDriverManager.chromedriver().quit();
         driver.quit();
-        System.out.println(String.valueOf(driver.manage().logs().get(LogType.BROWSER).getAll()));
     }
 }

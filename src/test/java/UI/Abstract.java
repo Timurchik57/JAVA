@@ -7,6 +7,8 @@ import org.junit.jupiter.api.BeforeEach;
 import org.openqa.selenium.*;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
+import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.firefox.FirefoxOptions;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.remote.RemoteWebDriver;
 import org.openqa.selenium.support.events.EventFiringWebDriver;
@@ -30,6 +32,7 @@ abstract public class Abstract {
     public static EventFiringWebDriver driver;
     //public static RemoteWebDriver driver;
     public static ChromeOptions chromeOptions;
+    public static FirefoxOptions foxOptions;
     public static WebDriverWait wait;
     public static WebDriverWait waitTime;
     public static WebDriverWait waitTime2;
@@ -37,14 +40,28 @@ abstract public class Abstract {
     public Properties props;
     public SQL sql;
 
+    public static String Browser = System.getProperty("browser");
+
     public static void setUp() throws MalformedURLException {
-        WebDriverManager.chromedriver().setup();
-        chromeOptions = new ChromeOptions();
-        chromeOptions.setHeadless(true);
-        chromeOptions.addArguments("window-size=1920, 1080");
-        //driver = new RemoteWebDriver(new URL("http://localhost:4445/wd/hub"), chromeOptions);
-        driver = new EventFiringWebDriver(new ChromeDriver(chromeOptions));
-       // driver.manage().window().maximize();
+        Browser = "Chrome";
+        if (Browser.contains("Chrome")) {
+            System.out.println("ага");
+            WebDriverManager.chromedriver().setup();
+            chromeOptions = new ChromeOptions();
+            //chromeOptions.setHeadless(true);
+            //chromeOptions.addArguments("window-size=1920, 1080");
+            driver = new EventFiringWebDriver(new ChromeDriver(chromeOptions));
+        }
+        if (Browser.contains("FireFox")) {
+            WebDriverManager.firefoxdriver().setup();
+            foxOptions = new FirefoxOptions();
+            //foxOptions.setHeadless(true);
+            //foxOptions.addArguments("window-size=1920, 1080");
+            driver = new EventFiringWebDriver(new FirefoxDriver(foxOptions));
+        }
+        //driver = new RemoteWebDriver(new URL("http://localhost:4445/wd/hub"), foxOptions);
+        System.out.println("сюда");
+        driver.manage().window().maximize();
         driver.register(new Custom());
         wait = new WebDriverWait(driver, 20);
         actions = new Actions(driver);

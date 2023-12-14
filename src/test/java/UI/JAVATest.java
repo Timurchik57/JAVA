@@ -34,6 +34,13 @@ public class JAVATest extends Abstract {
     public String TEXT = System.getProperty("TEST");
 
     @Test
+    public  void qwe () throws FileNotFoundException {
+       PrintWriter out = new PrintWriter("File/filename.txt");
+        out.println("текст");
+        out.close();
+    }
+
+    @Test
     @Order(1)
     @DisplayName("Тест для проверки Properties")
     public void Properties() throws IOException {
@@ -54,7 +61,6 @@ public class JAVATest extends Abstract {
     public void Properties2() {
         idea = new IDEA(driver);
         driver.get(idea.Idea);
-
         System.out.println(props.getProperty("Name"));
     }
 
