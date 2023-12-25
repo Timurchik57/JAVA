@@ -11,6 +11,7 @@ import org.openqa.selenium.logging.LogType;
 
 import static UI.Abstract.driver;
 
+
 public class TestListener implements TestWatcher {
 
     @SneakyThrows
@@ -18,8 +19,7 @@ public class TestListener implements TestWatcher {
     public void testFailed(ExtensionContext context, Throwable cause) {
         Allure.getLifecycle().addAttachment("Скриншот на месте падения теста", "image/png", "png",
                 ((TakesScreenshot) driver).getScreenshotAs(OutputType.BYTES));
-        Allure.addAttachment("Логи после падения теста: ",
-                String.valueOf(driver.manage().logs().get(LogType.BROWSER).getAll()));
+        Allure.addAttachment("Логи после падения теста: ",String.valueOf(driver.manage().logs().get(LogType.BROWSER).getAll()));
         WebDriverManager.chromedriver().quit();
         driver.quit();
     }
@@ -29,8 +29,7 @@ public class TestListener implements TestWatcher {
     public void testSuccessful(ExtensionContext context) {
         Allure.getLifecycle().addAttachment("Скриншот после успешного прохождения теста", "image/png", "png",
                 ((TakesScreenshot) driver).getScreenshotAs(OutputType.BYTES));
-        Allure.addAttachment("Логи после успешного прохождения теста: ",
-                String.valueOf(driver.manage().logs().get(LogType.BROWSER).getAll()));
+        Allure.addAttachment("Логи после успешного прохождения теста: ",String.valueOf(driver.manage().logs().get(LogType.BROWSER).getAll()));
         WebDriverManager.chromedriver().quit();
         driver.quit();
     }
