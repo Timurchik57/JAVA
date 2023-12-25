@@ -1,5 +1,6 @@
 package UI;
 
+import UI.CrosBrowserClass.CrosBrowser;
 import UI.PageObject.IDEA;
 import UI.PageObject.OpenYandex;
 import io.qameta.allure.*;
@@ -8,7 +9,9 @@ import io.restassured.http.ContentType;
 import io.restassured.path.json.JsonPath;
 import org.junit.jupiter.api.*;
 import org.junit.jupiter.api.extension.ExtendWith;
-import org.openqa.selenium.TimeoutException;
+
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvSource;
 import org.openqa.selenium.WebElement;
 
 import java.io.*;
@@ -18,7 +21,6 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 
 import java.util.List;
-import java.util.Properties;
 
 import static io.restassured.RestAssured.given;
 
@@ -32,6 +34,28 @@ public class JAVATest extends Abstract {
     IDEA idea;
     public String ID;
     public String TEXT = System.getProperty("TEST");
+    CrosBrowser crosBrowser;
+
+    @DisplayName("Кроссбраузерность")
+    @ParameterizedTest
+    @CsvSource({"Chrome", "FireFox"})
+    public  void Browser (String value) throws IOException {
+        idea = new IDEA(driver);
+        crosBrowser = new CrosBrowser();
+
+        crosBrowser.setUp(value);
+
+        driver.get(idea.Idea);
+
+        System.out.println(value);
+    }
+
+    @DisplayName("Параметризованный тест")
+    @ParameterizedTest
+    @CsvSource({"1", "2", "3", "4", "5"})
+    public  void Browser (Integer value) {
+        System.out.println(value + 10);
+    }
 
     @Test
     public  void qwe () throws FileNotFoundException {
@@ -63,8 +87,6 @@ public class JAVATest extends Abstract {
         driver.get(idea.Idea);
         System.out.println(props.getProperty("Name"));
     }
-
-
 
     @Test
     @DisplayName("Тест для проверки Явного ожидания Wait. Часть 2")

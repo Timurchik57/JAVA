@@ -4,6 +4,8 @@ import UI.PageObject.SQL;
 import io.github.bonigarcia.wdm.WebDriverManager;
 import io.qameta.allure.Step;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.provider.CsvSource;
 import org.openqa.selenium.*;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
@@ -13,6 +15,7 @@ import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.remote.RemoteWebDriver;
 import org.openqa.selenium.support.events.EventFiringWebDriver;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import org.testng.annotations.Parameters;
 
 import java.io.*;
 import java.net.MalformedURLException;
@@ -42,10 +45,9 @@ abstract public class Abstract {
 
     public static String Browser = System.getProperty("browser");
 
-    public static void setUp() throws MalformedURLException {
+    public static void setUp() {
         Browser = "Chrome";
         if (Browser.contains("Chrome")) {
-            System.out.println("ага");
             WebDriverManager.chromedriver().setup();
             chromeOptions = new ChromeOptions();
             //chromeOptions.setHeadless(true);
@@ -60,18 +62,17 @@ abstract public class Abstract {
             driver = new EventFiringWebDriver(new FirefoxDriver(foxOptions));
         }
         //driver = new RemoteWebDriver(new URL("http://localhost:4445/wd/hub"), foxOptions);
-        System.out.println("сюда");
         driver.manage().window().maximize();
         driver.register(new Custom());
         wait = new WebDriverWait(driver, 20);
         actions = new Actions(driver);
-
     }
 
     @BeforeEach
     public void init() throws IOException {
         sql = new SQL();
         sql.Connect();
+
 
         FileInputStream in = new FileInputStream("src/test/resources/my.properties");
         props = new Properties();
