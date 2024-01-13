@@ -1,6 +1,7 @@
 package UI.CrosBrowserClass;
 
 import UI.PageObject.IDEA;
+import io.qameta.allure.*;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -11,6 +12,8 @@ import java.io.IOException;
 import static UI.CrosBrowserClass.CrosBrowser.driver;
 
 @ExtendWith(TestListnerCros.class)
+@Epic("Тесты UI на разных браузерах")
+@Feature("Направления")
 public class CrosBrowserTest {
 
     IDEA idea;

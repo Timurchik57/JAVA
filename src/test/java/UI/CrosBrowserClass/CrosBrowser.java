@@ -4,6 +4,7 @@ import UI.Custom;
 import UI.PageObject.IDEA;
 import UI.PageObject.SQL;
 import io.github.bonigarcia.wdm.WebDriverManager;
+import io.qameta.allure.Step;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
@@ -30,6 +31,7 @@ public class CrosBrowser {
     public SQL sql;
     public static String Browser;
 
+    @Step("Запускаем тест через браузер = {0}")
     public void setUp(String browser) throws IOException {
         Browser = browser;
         if (Browser.contains("Chrome")) {
