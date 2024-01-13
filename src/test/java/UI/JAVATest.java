@@ -36,6 +36,12 @@ public class JAVATest extends Abstract {
     public String TEXT = System.getProperty("TEST");
     CrosBrowser crosBrowser;
 
+    @Test
+    @DisplayName("Урок 1 под GitHib")
+    public  void forGitHub () {
+        System.out.println("GitHib");
+    }
+
     @DisplayName("Кроссбраузерность")
     @ParameterizedTest
     @CsvSource({"Chrome", "FireFox"})
