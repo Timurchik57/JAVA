@@ -7,6 +7,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.openqa.selenium.*;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
+import org.openqa.selenium.firefox.FirefoxOptions;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.remote.LocalFileDetector;
 import org.openqa.selenium.remote.RemoteWebDriver;
@@ -30,22 +31,32 @@ abstract public class Abstract {
    //public static EventFiringWebDriver driver;
     public static RemoteWebDriver driver;
     public static ChromeOptions chromeOptions;
+    public static FirefoxOptions firefoxOptions;
     public static WebDriverWait wait;
     public static Actions actions;
     public static String Count;
     public SQL sql;
     public static String remote_url_chrome = System.getProperty("UrlChrome");
+    public static String Browser = System.getProperty("browser");
 
     public static void setUp() throws MalformedURLException {
-        WebDriverManager.chromedriver().setup();
-        chromeOptions = new ChromeOptions();
-        chromeOptions.setHeadless(true);
-        chromeOptions.addArguments("window-size=1920, 1080");
-        driver = new RemoteWebDriver(new URL(remote_url_chrome), chromeOptions);
-        driver.setFileDetector(new LocalFileDetector());
-       // driver = new EventFiringWebDriver(new ChromeDriver(chromeOptions));
-        //driver.manage().window().maximize();
-       // driver.register(new Custom());
+        if(Browser.contains("Chrome")) {
+            WebDriverManager.chromedriver().setup();
+            chromeOptions = new ChromeOptions();
+            chromeOptions.setHeadless(true);
+            chromeOptions.addArguments("window-size=1920, 1080");
+            driver = new RemoteWebDriver(new URL(remote_url_chrome), chromeOptions);
+            driver.setFileDetector(new LocalFileDetector());
+        }
+        if(Browser.contains("FireFox")) {
+            WebDriverManager.chromedriver().setup();
+            firefoxOptions = new FirefoxOptions();
+            firefoxOptions.setHeadless(true);
+            firefoxOptions.addArguments("window-size=1920, 1080");
+            driver = new RemoteWebDriver(new URL(remote_url_chrome), firefoxOptions);
+            driver.setFileDetector(new LocalFileDetector());
+        }
+        driver.manage().window().maximize();
         wait = new WebDriverWait(driver, 20);
         actions = new Actions(driver);
     }
