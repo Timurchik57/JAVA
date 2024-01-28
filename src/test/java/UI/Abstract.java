@@ -5,18 +5,11 @@ import io.github.bonigarcia.wdm.WebDriverManager;
 import io.qameta.allure.Step;
 import org.junit.jupiter.api.BeforeEach;
 import org.openqa.selenium.*;
-import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
-import org.openqa.selenium.firefox.FirefoxOptions;
 import org.openqa.selenium.interactions.Actions;
-import org.openqa.selenium.remote.LocalFileDetector;
-import org.openqa.selenium.remote.RemoteWebDriver;
-import org.openqa.selenium.support.events.EventFiringWebDriver;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.io.*;
-import java.net.MalformedURLException;
-import java.net.URL;
 import java.nio.charset.Charset;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
@@ -28,41 +21,30 @@ import static org.openqa.selenium.support.ui.ExpectedConditions.visibilityOfElem
 
 abstract public class Abstract {
 
-   //public static EventFiringWebDriver driver;
-    public static RemoteWebDriver driver;
-    public static ChromeOptions chromeOptions;
-    public static FirefoxOptions firefoxOptions;
+   public static WebDriver driver;
     public static WebDriverWait wait;
     public static Actions actions;
-    public static String Count;
     public SQL sql;
-    public static String remote_url_chrome = System.getProperty("UrlChrome");
     public static String Browser = System.getProperty("browser");
+    public static WebDriverManager webDriverManager;
 
-    public static void setUp() throws MalformedURLException {
-        if(Browser.contains("Chrome")) {
-            WebDriverManager.chromedriver().setup();
-            chromeOptions = new ChromeOptions();
-            chromeOptions.setHeadless(true);
-            chromeOptions.addArguments("window-size=1920, 1080");
-            driver = new RemoteWebDriver(new URL(remote_url_chrome), chromeOptions);
-            driver.setFileDetector(new LocalFileDetector());
+    public static void setUp() {
+
+        if (Browser.contains("Chrome")) {
+            webDriverManager = WebDriverManager.chromedriver().browserInDocker();
         }
-        if(Browser.contains("FireFox")) {
-            WebDriverManager.chromedriver().setup();
-            firefoxOptions = new FirefoxOptions();
-            firefoxOptions.setHeadless(true);
-            firefoxOptions.addArguments("window-size=1920, 1080");
-            driver = new RemoteWebDriver(new URL(remote_url_chrome), firefoxOptions);
-            driver.setFileDetector(new LocalFileDetector());
+        else if (Browser.contains("FireFox")) {
+            webDriverManager = WebDriverManager.firefoxdriver().browserInDocker();
         }
-        driver.manage().window().maximize();
+
+        driver = webDriverManager.create();
+        driver.manage().window().setSize(new Dimension(1920,1080));
         wait = new WebDriverWait(driver, 20);
         actions = new Actions(driver);
     }
 
     @BeforeEach
-    public void init() throws IOException {
+    public void init() {
         sql = new SQL();
         sql.Connect();
         setUp();

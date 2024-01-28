@@ -9,13 +9,8 @@ import org.openqa.selenium.support.events.EventFiringWebDriver;
 
 public class IDEA extends Abstract {
 
-//    public IDEA(WebDriver driver) {
-//        this.driver = (EventFiringWebDriver) driver;
-//        PageFactory.initElements(driver, this);
-//    }
-
     public IDEA(WebDriver driver) {
-        Abstract.driver = (RemoteWebDriver) driver;
+        this.driver = driver;
         PageFactory.initElements(driver, this);
     }
 

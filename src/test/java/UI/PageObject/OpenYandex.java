@@ -11,15 +11,15 @@ import org.openqa.selenium.support.events.EventFiringWebDriver;
 
 public class OpenYandex extends Abstract {
 
-//    public OpenYandex(WebDriver driver) {
-//        this.driver = (EventFiringWebDriver) driver;
-//        PageFactory.initElements(driver, this);
-//    }
-
     public OpenYandex(WebDriver driver) {
-        Abstract.driver = (RemoteWebDriver) driver;
+        this.driver = (EventFiringWebDriver) driver;
         PageFactory.initElements(driver, this);
     }
+
+//    public OpenYandex(WebDriver driver) {
+//        Abstract.driver = (RemoteWebDriver) driver;
+//        PageFactory.initElements(driver, this);
+//    }
 
     public String Yandex = "https://www.ozon.ru/";
 
