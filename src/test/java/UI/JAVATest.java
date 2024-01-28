@@ -54,6 +54,7 @@ public class JAVATest extends Abstract {
         driver.get(idea.Idea);
 
         System.out.println(value);
+
     }
 
     @DisplayName("Параметризованный тест")
