@@ -2,6 +2,7 @@ package UI;
 
 import UI.PageObject.SQL;
 import io.github.bonigarcia.wdm.WebDriverManager;
+import io.qameta.allure.Attachment;
 import io.qameta.allure.Step;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -32,7 +33,7 @@ import static org.openqa.selenium.support.ui.ExpectedConditions.visibilityOfElem
 
 abstract public class Abstract {
 
-    public static EventFiringWebDriver driver;
+    public static WebDriver driver;
     //public static RemoteWebDriver driver;
     public static ChromeOptions chromeOptions;
     public static FirefoxOptions foxOptions;
@@ -52,18 +53,18 @@ abstract public class Abstract {
             chromeOptions = new ChromeOptions();
             //chromeOptions.setHeadless(true);
             //chromeOptions.addArguments("window-size=1920, 1080");
-            driver = new EventFiringWebDriver(new ChromeDriver(chromeOptions));
+            driver = new ChromeDriver((chromeOptions));
         }
         if (Browser.contains("FireFox")) {
             WebDriverManager.firefoxdriver().setup();
             foxOptions = new FirefoxOptions();
             //foxOptions.setHeadless(true);
             //foxOptions.addArguments("window-size=1920, 1080");
-            driver = new EventFiringWebDriver(new FirefoxDriver(foxOptions));
+            driver = new ChromeDriver((foxOptions));
         }
         //driver = new RemoteWebDriver(new URL("http://localhost:4445/wd/hub"), foxOptions);
         driver.manage().window().maximize();
-        driver.register(new Custom());
+       // driver.register(new Custom());
         wait = new WebDriverWait(driver, 20);
         actions = new Actions(driver);
     }

@@ -13,6 +13,7 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 import org.openqa.selenium.WebElement;
+import org.opentest4j.AssertionFailedError;
 
 import java.io.*;
 import java.nio.file.Files;
@@ -38,7 +39,7 @@ public class JAVATest extends Abstract {
 
     @Test
     @DisplayName("Урок 4 под GitHub")
-    public  void forGitHub () {
+    public  void forGitHub4 () {
         System.out.println("GitHub");
     }
 
