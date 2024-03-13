@@ -38,9 +38,12 @@ public class JAVATest extends Abstract {
     CrosBrowser crosBrowser;
 
     @Test
-    @DisplayName("Урок 6 под GitHub")
+    @DisplayName("Урок по Allure")
     public  void forGitHub4 () {
-        System.out.println("Для 1 ветки");
+
+        System.out.println("Просто текст в консоль");
+        System.out.println("Просто текст в консоль 1");
+        System.out.println("Просто текст в консоль 2");
     }
 
     @Test

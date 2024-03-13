@@ -4,9 +4,9 @@ import UI.PageObject.SQL;
 import io.github.bonigarcia.wdm.WebDriverManager;
 import io.qameta.allure.Attachment;
 import io.qameta.allure.Step;
+import org.apache.commons.io.output.TeeOutputStream;
 import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
-import org.junit.jupiter.params.provider.CsvSource;
+
 import org.openqa.selenium.*;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
@@ -44,6 +44,8 @@ abstract public class Abstract {
     public Properties props;
     public SQL sql;
 
+    public static ByteArrayOutputStream buffer;
+
     public static String Browser = System.getProperty("browser");
 
     public static void setUp() {
@@ -74,12 +76,25 @@ abstract public class Abstract {
         sql = new SQL();
         sql.Connect();
 
-
         FileInputStream in = new FileInputStream("src/test/resources/my.properties");
         props = new Properties();
         props.load(in);
         in.close();
         setUp();
+        terminal();
+    }
+
+    @Attachment
+    public static byte[] LogConsole (String name) throws IOException {
+        return Files.readAllBytes(Paths.get("src/test/resources", name));
+    }
+
+    @Step("Запись данных из консоли в файл")
+    public void terminal () {
+        buffer = new ByteArrayOutputStream();
+        OutputStream teeStream = new TeeOutputStream(System.out, buffer);
+        // После этой строки любой вывод будет сохраняться в buffer
+        System.setOut(new PrintStream(teeStream));
     }
 
     @Step("Запись в Properties переменной {1} = {2}")
