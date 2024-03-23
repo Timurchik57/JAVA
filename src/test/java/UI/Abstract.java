@@ -147,6 +147,7 @@ abstract public class Abstract {
         WebElement element = driver.findElement(locator);
         actions.moveToElement(element);
         actions.perform();
+        //Нажимаем на элемент
         element.click();
     }
 
