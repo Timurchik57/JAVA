@@ -40,10 +40,7 @@ public class JAVATest extends Abstract {
     @Test
     @DisplayName("Урок по Allure")
     public  void forGitHub4 () {
-
         System.out.println("Просто текст в консоль");
-        System.out.println("Просто текст в консоль 1");
-        System.out.println("Просто текст в консоль 2");
     }
 
     @Test
