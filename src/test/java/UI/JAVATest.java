@@ -40,7 +40,7 @@ public class JAVATest extends Abstract {
     @Test
     @DisplayName("Урок 7 под GitHub")
     public  void forGitHub7 () {
-        System.out.println("Этот текст должен попасть в исходный репозиторий  ");
+        System.out.println("Этот текст должен попасть в исходный репозиторий");
 
     }
 
