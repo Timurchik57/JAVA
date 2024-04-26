@@ -37,15 +37,11 @@ public class CrosBrowser {
         if (Browser.contains("Chrome")) {
             WebDriverManager.chromedriver().setup();
             chromeOptions = new ChromeOptions();
-            //chromeOptions.setHeadless(true);
-            //chromeOptions.addArguments("window-size=1920, 1080");
             driver = new EventFiringWebDriver(new ChromeDriver(chromeOptions));
         }
         if (Browser.contains("FireFox")) {
             WebDriverManager.firefoxdriver().setup();
             foxOptions = new FirefoxOptions();
-            //foxOptions.setHeadless(true);
-            //foxOptions.addArguments("window-size=1920, 1080");
             driver = new EventFiringWebDriver(new FirefoxDriver(foxOptions));
         }
         driver.manage().window().maximize();
@@ -66,11 +62,9 @@ public class CrosBrowser {
     @ParameterizedTest
     @CsvSource({"Chrome", "FireFox"})
     public  void Browser (String value) throws IOException {
-        IDEA idea = new IDEA(driver);
-
         setUp(value);
+        driver.get("https://www.jetbrains.com/idea/");
 
-        driver.get(idea.Idea);
         System.out.println(value);
     }
 }

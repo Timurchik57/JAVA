@@ -49,12 +49,17 @@ abstract public class Abstract {
     public static String Browser = System.getProperty("browser");
 
     public static void setUp() {
+       // System.setProperty("webdriver.chrome.driver", "../usr/bin/chromedriver");
         Browser = "Chrome";
         if (Browser.contains("Chrome")) {
             WebDriverManager.chromedriver().setup();
+           // driver = new ChromeDriver();
             chromeOptions = new ChromeOptions();
-            //chromeOptions.setHeadless(true);
+           // chromeOptions.setHeadless(true);
             //chromeOptions.addArguments("window-size=1920, 1080");
+           // chromeOptions.addArguments("--no-sandbox");
+           // chromeOptions.addArguments("--disable-setuid-sandbox");
+           // chromeOptions.addArguments("--remote-debugging-port=8111");
             driver = new ChromeDriver((chromeOptions));
         }
         if (Browser.contains("FireFox")) {

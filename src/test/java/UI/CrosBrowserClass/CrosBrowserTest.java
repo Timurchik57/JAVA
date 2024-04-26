@@ -23,11 +23,10 @@ public class CrosBrowserTest {
     @ParameterizedTest
     @CsvSource({"Chrome", "FireFox"})
     public  void Browser (String value) throws IOException {
-        idea = new IDEA(driver);
         crosBrowser = new CrosBrowser();
 
         crosBrowser.setUp(value);
-        driver.get(idea.Idea);
+        driver.get("https://www.jetbrains.com/idea/");
 
         System.out.println(value);
     }
