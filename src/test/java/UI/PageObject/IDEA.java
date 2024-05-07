@@ -43,12 +43,10 @@ public class IDEA extends Abstract {
     public By ListIDEs = By.xpath(
             "(//h5[contains(.,'IDEs')])[1]/following-sibling::div//div[@class='_mainSubmenuSubColumns__column_nujyrk _mainSubmenuSubColumns__column--6_watp9g'][1]/div/div/a/span/span");
 
-    /**
-     * Главаная страница - Developer Tools - IDEs
-     */
-    @Step("Нажимаем на элемент {0}")
-    public By IDEs (String value) {
-        By element = By.xpath("(//span[@class='rs-text-2 rs-text-2_theme_light _mainSubmenuItem__title_hx12g _mainSubmenuItem__titleWithLogo_09j6'][contains(.,'"+value+"')])[1]");
+
+    /** Главаная страница - Developer Tools - Все элементы */
+    public By LocationDeveloperTools (String str) {
+        By element = By.xpath("(//div[@class='_mainSubmenuItem_kg0jc _mainSubmenuItem_l7othf _mainSubmenuItem_ljz82']//span[@class='_mainSubmenuItem__titlePart_1xyfn']/span[contains(.,'"+str+"')])[1]");
         return element;
     }
 

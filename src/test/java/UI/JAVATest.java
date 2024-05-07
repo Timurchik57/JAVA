@@ -36,6 +36,21 @@ public class JAVATest extends Abstract {
     public String TEXT = System.getProperty("TEST");
     CrosBrowser crosBrowser;
 
+
+    @Test
+    @DisplayName("Тест для проверки Универсального локатора")
+    public void Universalocator() {
+
+        idea = new IDEA(driver);
+
+        driver.get(idea.Idea);
+        ClickElement(idea.DeveloperTools);
+        ClickElement(idea.LocationDeveloperTools("All IDEs"));
+        driver.navigate().back();
+        ClickElement(idea.LocationDeveloperTools("Aqua"));
+
+    }
+
     @Test
     @DisplayName("Урок 1 под GitHib")
     public  void forGitHub () {
@@ -107,7 +122,7 @@ public class JAVATest extends Abstract {
         idea = new IDEA(driver);
         driver.get(idea.Idea);
 
-        if (IfWaitElement(idea.IDEs("CLion"), 1)) {
+        if (IfWaitElement(idea.LocationDeveloperTools("CLion"), 1)) {
             System.out.println("Элемент обнаружен на странице выполняем следующий перечень действий");
         } else {
             System.out.println("Элемент НЕ обнаружен на странице выполняем следующий перечень действий");
@@ -130,9 +145,9 @@ public class JAVATest extends Abstract {
         idea = new IDEA(driver);
         driver.get(idea.Idea);
         ClickElement(idea.DeveloperTools);
-        ClickElement(idea.IDEs("Aqua"));
+        ClickElement(idea.LocationDeveloperTools("Aqua"));
         driver.navigate().back();
-        ClickElement(idea.IDEs("CLion"));
+        ClickElement(idea.LocationDeveloperTools("CLion"));
     }
 
     @Test
