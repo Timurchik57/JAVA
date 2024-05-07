@@ -24,7 +24,14 @@ public class IDEA extends Abstract {
 
     /** Главаная страница - Developer Tools */
     public By DeveloperTools = By.xpath(
-            "//nav[@class='_mainMenu_u71uq wt-col-inline']/div[@data-test-marker='Developer Tools']");
+            "//nav[@class='_mainMenu_9aa58 wt-col-inline']/div[@data-test-marker='Developer Tools']");
+
+
+    /** Главаная страница - Developer Tools - Все элементы */
+    public By LocationDeveloperTools (String str) {
+        By element = By.xpath("(//div[@class='_mainSubmenuItem_kg0jc _mainSubmenuItem_l7othf _mainSubmenuItem_ljz82']//span[@class='_mainSubmenuItem__titlePart_1xyfn']/span[contains(.,'"+str+"')])[1]");
+        return element;
+    }
 
     /** Главаная страница - Developer Tools - List IDEs */
     public By ListIDEs = By.xpath(

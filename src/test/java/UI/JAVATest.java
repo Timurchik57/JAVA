@@ -34,9 +34,29 @@ public class JAVATest extends Abstract {
     public String Text = System.getProperty("TextMvn");
 
     @Test
+    @DisplayName("Тест для проверки Универсального локатора")
+    public void Universalocator() {
+
+        idea = new IDEA(driver);
+
+        driver.get(idea.Idea);
+        ClickElement(idea.DeveloperTools);
+        ClickElement(idea.LocationDeveloperTools("All IDEs"));
+        driver.navigate().back();
+        ClickElement(idea.LocationDeveloperTools("Aqua"));
+
+    }
+
+    @Test
     @DisplayName("Тест для проверки Cherry-Pick")
     public void TestBranches() {
-        System.out.println("Тест для проверки Cherry-Pick");
+        idea = new IDEA(driver);
+
+        driver.get(idea.Idea);
+        ClickElement(idea.DeveloperTools);
+        ClickElement(idea.LocationDeveloperTools("All IDEs"));
+        driver.navigate().back();
+        ClickElement(idea.LocationDeveloperTools("Aqua"));
     }
 
     @Test
