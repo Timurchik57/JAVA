@@ -37,9 +37,10 @@ abstract public class Abstract {
     public static String Count;
     public SQL sql;
     public static String remote_url_chrome = System.getProperty("UrlChrome");
-    public static String Browser = System.getProperty("browser");
+    public static String Browser;
 
     public static void setUp() throws MalformedURLException {
+        Browser = "Chrome";
         if(Browser.contains("Chrome")) {
             WebDriverManager.chromedriver().setup();
             chromeOptions = new ChromeOptions();
