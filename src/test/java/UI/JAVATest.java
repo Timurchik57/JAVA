@@ -57,11 +57,6 @@ public class JAVATest extends Abstract {
         System.out.println("GitHub");
     }
 
-    @Test
-    @DisplayName("Урок 1 под GitHub")
-    public  void forGitHub () {
-        System.out.println("GitHub");
-    }
 
     @DisplayName("Кроссбраузерность")
     @ParameterizedTest
