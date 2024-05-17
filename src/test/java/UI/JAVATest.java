@@ -24,6 +24,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static io.restassured.RestAssured.given;
+import static org.openqa.selenium.support.ui.ExpectedConditions.visibilityOfElementLocated;
 
 @ExtendWith(TestlistnerApi.class)
 @ExtendWith(TestListener.class)
@@ -37,6 +38,17 @@ public class JAVATest extends Abstract {
     public String TEXT = System.getProperty("TEST");
     CrosBrowser crosBrowser;
 
+
+
+    @Test
+    @DisplayName("Тест для проверки Явного ожидания Wait")
+    public void WaitTest() {
+        idea = new IDEA(driver);
+        driver.get(idea.Idea);
+
+        ClickElementTime(idea.DeveloperTools, 5);
+        WaitElementTime(idea.LocationDeveloperTools("All IDEs"), 10);
+    }
 
     @Test
     @DisplayName("Тест для проверки Универсального локатора")
@@ -107,7 +119,7 @@ public class JAVATest extends Abstract {
         idea = new IDEA(driver);
 
         driver.get(idea.Idea);
-        ClickElementTime(idea.DeveloperTools, 5);
+       // ClickElementTime(idea.DeveloperTools, 5);
         String publicStr  = driver.findElement(idea.DeveloperToolsName).getText();
 
         InputProp("src/test/resources/my.properties", "Name2", publicStr);
@@ -136,15 +148,6 @@ public class JAVATest extends Abstract {
         } else {
             System.out.println("Элемент НЕ обнаружен на странице выполняем следующий перечень действий");
         }
-    }
-
-    @Test
-    @DisplayName("Тест для проверки Явного ожидания Wait")
-    public void WaitTest() {
-
-        idea = new IDEA(driver);
-        driver.get(idea.Idea);
-        ClickElementTime(idea.DeveloperTools, 5);
     }
 
     @Test
