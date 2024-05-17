@@ -2,24 +2,19 @@ package UI;
 
 import UI.PageObject.SQL;
 import io.github.bonigarcia.wdm.WebDriverManager;
+import io.qameta.allure.Attachment;
 import io.qameta.allure.Step;
+import org.apache.commons.io.output.TeeOutputStream;
 import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
-import org.junit.jupiter.params.provider.CsvSource;
+
 import org.openqa.selenium.*;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
-import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.firefox.FirefoxOptions;
 import org.openqa.selenium.interactions.Actions;
-import org.openqa.selenium.remote.RemoteWebDriver;
-import org.openqa.selenium.support.events.EventFiringWebDriver;
 import org.openqa.selenium.support.ui.WebDriverWait;
-import org.testng.annotations.Parameters;
 
 import java.io.*;
-import java.net.MalformedURLException;
-import java.net.URL;
 import java.nio.charset.Charset;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
@@ -32,8 +27,7 @@ import static org.openqa.selenium.support.ui.ExpectedConditions.visibilityOfElem
 
 abstract public class Abstract {
 
-    public static EventFiringWebDriver driver;
-    //public static RemoteWebDriver driver;
+    public static WebDriver driver;
     public static ChromeOptions chromeOptions;
     public static FirefoxOptions foxOptions;
     public static WebDriverWait wait;
@@ -43,27 +37,15 @@ abstract public class Abstract {
     public Properties props;
     public SQL sql;
 
-    public static String Browser = System.getProperty("browser");
+    public static ByteArrayOutputStream buffer;
 
     public static void setUp() {
-        Browser = "Chrome";
-        if (Browser.contains("Chrome")) {
-            WebDriverManager.chromedriver().setup();
-            chromeOptions = new ChromeOptions();
-            //chromeOptions.setHeadless(true);
-            //chromeOptions.addArguments("window-size=1920, 1080");
-            driver = new EventFiringWebDriver(new ChromeDriver(chromeOptions));
-        }
-        if (Browser.contains("FireFox")) {
-            WebDriverManager.firefoxdriver().setup();
-            foxOptions = new FirefoxOptions();
-            //foxOptions.setHeadless(true);
-            //foxOptions.addArguments("window-size=1920, 1080");
-            driver = new EventFiringWebDriver(new FirefoxDriver(foxOptions));
-        }
-        //driver = new RemoteWebDriver(new URL("http://localhost:4445/wd/hub"), foxOptions);
+        WebDriverManager.chromedriver().driverVersion("124.0.6367.119").setup();
+        chromeOptions = new ChromeOptions();
+        // chromeOptions.setHeadless(true);
+        //chromeOptions.addArguments("window-size=1920, 1080");
+        driver = new ChromeDriver((chromeOptions));
         driver.manage().window().maximize();
-        driver.register(new Custom());
         wait = new WebDriverWait(driver, 20);
         actions = new Actions(driver);
     }
@@ -73,12 +55,25 @@ abstract public class Abstract {
         sql = new SQL();
         sql.Connect();
 
-
         FileInputStream in = new FileInputStream("src/test/resources/my.properties");
         props = new Properties();
         props.load(in);
         in.close();
         setUp();
+        terminal();
+    }
+
+    @Attachment
+    public static byte[] LogConsole(String name) throws IOException {
+        return Files.readAllBytes(Paths.get("src/test/resources", name));
+    }
+
+    @Step("Запись данных из консоли в файл")
+    public void terminal() {
+        buffer = new ByteArrayOutputStream();
+        OutputStream teeStream = new TeeOutputStream(System.out, buffer);
+        // После этой строки любой вывод будет сохраняться в buffer
+        System.setOut(new PrintStream(teeStream));
     }
 
     @Step("Запись в Properties переменной {1} = {2}")
@@ -93,6 +88,56 @@ abstract public class Abstract {
         out.close();
     }
 
+    @Step("Ожидание появления элемента {0}")
+    public void WaitElement(By locator) {
+        wait.until(visibilityOfElementLocated(locator));
+    }
+
+    @Step("Ожидание появления элемента {0}, за время - {1}")
+    public void WaitElementTime(By locator, Integer time) {
+        waitTime = new WebDriverWait(driver, time);
+        waitTime.until(visibilityOfElementLocated(locator));
+    }
+
+    @Step("Нажимаем на элемент")
+    public void ClickElement(By locator) {
+        WaitElement(locator);
+        WebElement element = driver.findElement(locator);
+        actions.moveToElement(element);
+        actions.perform();
+        //Нажимаем на элемент
+        element.click();
+    }
+
+    @Step("Нажимаем на элемент с ожиданием по вемени")
+    public void ClickElementTime(By locator, Integer time) {
+        WaitElementTime(locator, time);
+        WebElement element = driver.findElement(locator);
+        actions.moveToElement(element);
+        actions.perform();
+        element.click();
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     @Step("Проверка появится ли элемент {0}, за время - {1}")
     public boolean IfWaitElement(By locator, Integer time) {
         waitTime = new WebDriverWait(driver, time);
@@ -105,39 +150,10 @@ abstract public class Abstract {
         }
     }
 
-    @Step("Ожидание появления элемента {0}, за время - {1}")
-    public void WaitElementTime(By locator, Integer time) {
-        waitTime = new WebDriverWait(driver, time);
-        waitTime.until(visibilityOfElementLocated(locator));
-    }
-
-    @Step("Ожидание появления эдемента {0}")
-    public void WaitElement(By locator) {
-        wait.until(visibilityOfElementLocated(locator));
-    }
-
-    @Step("Нажимаем на элемент с ожиданием по вемени")
-    public void ClickElementTime(By locator, Integer time) {
-        WaitElementTime(locator, time);
-        WebElement element = driver.findElement(locator);
-        actions.moveToElement(element);
-        actions.perform();
-        element.click();
-    }
-
-    @Step("Нажимаем на элемент")
-    public void ClickElement(By locator) {
-        WaitElement(locator);
-        WebElement element = driver.findElement(locator);
-        actions.moveToElement(element);
-        actions.perform();
-        element.click();
-    }
-
     @Step("Ввод текста под Shadow root")
     public static void inputWord(WebElement element, String word) {
         JavascriptExecutor js = (JavascriptExecutor) driver;
-        js.executeScript("arguments[0].value='"+word+"'", element);
+        js.executeScript("arguments[0].value='" + word + "'", element);
         element.sendKeys(Keys.BACK_SPACE);
     }
 
@@ -149,14 +165,14 @@ abstract public class Abstract {
     }
 
     @Step("Замена текста в Файле")
-    public void ReplaceMethod (String File, String Word, String Replace) throws IOException {
+    public void ReplaceMethod(String File, String Word, String Replace) throws IOException {
         File file = new File(File);
         File fileWrite = new File("File/testWrite.txt");
 
         BufferedReader br = new BufferedReader(new FileReader(file));
         BufferedWriter bw = new BufferedWriter(new FileWriter(fileWrite));
         String ln;
-        while((ln = br.readLine()) != null) {
+        while ((ln = br.readLine()) != null) {
             bw.write(ln.replace(Word, Replace)
             );
         }
