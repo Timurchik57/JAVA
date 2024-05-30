@@ -42,7 +42,7 @@ abstract public class Abstract {
     public static void setUp() throws MalformedURLException {
         Browser = "Chrome";
         if(Browser.contains("Chrome")) {
-            WebDriverManager.chromedriver().driverVersion("124.0.6367.119").setup();
+            WebDriverManager.chromedriver().setup();
             chromeOptions = new ChromeOptions();
             chromeOptions.setHeadless(true);
             chromeOptions.addArguments("window-size=1920, 1080");
