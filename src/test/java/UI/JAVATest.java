@@ -40,7 +40,7 @@ public class JAVATest extends Abstract {
     public String TEXT = System.getProperty("TEST");
     CrosBrowser crosBrowser;
 
-    @Test
+      @Test
     @DisplayName("Условия Явного ожидания Wait")
     public void WaitTest3() throws InterruptedException {
         idea = new IDEA(driver);
@@ -53,8 +53,7 @@ public class JAVATest extends Abstract {
             Thread.sleep(3000);
         }
     }
-
-    @Test
+  
     @DisplayName("Тест для проверки Явного ожидания Wait")
     public void WaitTest() {
         idea = new IDEA(driver);
@@ -63,21 +62,7 @@ public class JAVATest extends Abstract {
         ClickElementTime(idea.DeveloperTools, 5);
         WaitElementTime(idea.LocationDeveloperTools("All IDEs"), 10);
     }
-
-    @Test
-    @DisplayName("Тест для проверки Универсального локатора")
-    public void Universalocator() {
-
-        idea = new IDEA(driver);
-
-        driver.get(idea.Idea);
-        ClickElement(idea.DeveloperTools);
-        ClickElement(idea.LocationDeveloperTools("All IDEs"));
-        driver.navigate().back();
-        ClickElement(idea.LocationDeveloperTools("Aqua"));
-
-    }
-
+  
     @Test
     @DisplayName("Урок 7 под GitHub")
     public  void forGitHub7 () {
@@ -85,18 +70,19 @@ public class JAVATest extends Abstract {
         System.out.println("Этот текст должен попасть в исходный репозиторий ещё один раз");
 
     }
-
-    @Test
+  
+   @Test
     @DisplayName("Урок по Allure")
     public  void forGitHub4 () {
         System.out.println("Просто текст в консоль");
     }
 
     @Test
-    @DisplayName("Урок 1 под GitHub")
+    @DisplayName("Урок 1 под GitHib")
     public  void forGitHub () {
         System.out.println("GitHub");
     }
+
 
     @DisplayName("Кроссбраузерность")
     @ParameterizedTest
