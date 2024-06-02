@@ -12,6 +12,8 @@ import org.junit.jupiter.api.extension.ExtendWith;
 
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
+import org.openqa.selenium.By;
+import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebElement;
 import org.opentest4j.AssertionFailedError;
 
@@ -37,8 +39,21 @@ public class JAVATest extends Abstract {
     public String ID;
     public String TEXT = System.getProperty("TEST");
     CrosBrowser crosBrowser;
+
+      @Test
+    @DisplayName("Условия Явного ожидания Wait")
+    public void WaitTest3() throws InterruptedException {
+        idea = new IDEA(driver);
+        driver.get(idea.Idea);
+
+        if (!IfElementTime(By.xpath("(//div[@data-test-marker='Developer Tool'])[1]"), 5)) {
+            ClickElementTime(By.xpath("(//div[@data-test-marker='Developer Tool'])[1]"), 5);
+        } else {
+            ClickElementTime(idea.TeamTools, 1);
+            Thread.sleep(3000);
+        }
+    }
   
-     @Test
     @DisplayName("Тест для проверки Явного ожидания Wait")
     public void WaitTest() {
         idea = new IDEA(driver);

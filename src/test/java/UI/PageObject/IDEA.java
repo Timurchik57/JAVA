@@ -33,6 +33,12 @@ public class IDEA extends Abstract {
             "(//div[@data-test-marker='Developer Tools'])[1]");
 
     /**
+     * Главаная страница - Team Tools
+     */
+    public By TeamTools = By.xpath(
+            "(//button[@aria-label='Team Tools: Open submenu'])[1]");
+
+    /**
      * Главаная страница - Developer Tools - Название
      */
     public By DeveloperToolsName = By.xpath(
