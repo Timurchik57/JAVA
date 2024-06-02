@@ -99,6 +99,18 @@ abstract public class Abstract {
         waitTime.until(visibilityOfElementLocated(locator));
     }
 
+    @Step("Условие появления элемента {0}, за время - {1}")
+    public boolean IfElementTime(By locator, Integer time) {
+        waitTime = new WebDriverWait(driver, time);
+        try {
+            waitTime.until(visibilityOfElementLocated(locator));
+            return true;
+        } catch (TimeoutException e) {
+            System.out.println("Элемента нет на странице");
+            return false;
+        }
+    }
+
     @Step("Нажимаем на элемент")
     public void ClickElement(By locator) {
         WaitElement(locator);
