@@ -13,6 +13,7 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 import org.openqa.selenium.By;
+import org.openqa.selenium.Cookie;
 import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebElement;
 import org.opentest4j.AssertionFailedError;
@@ -24,6 +25,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 
 import java.util.List;
+import java.util.Set;
 
 import static io.restassured.RestAssured.given;
 import static org.openqa.selenium.support.ui.ExpectedConditions.visibilityOfElementLocated;
@@ -39,6 +41,17 @@ public class JAVATest extends Abstract {
     public String ID;
     public String TEXT = System.getProperty("TEST");
     CrosBrowser crosBrowser;
+
+    @Test
+    public void Cookies () throws IOException {
+        driver.get("https://dzen.ru/id/660257ca637a7913328b0bf3");
+        Set<Cookie> cookies = driver.manage().getCookies();
+        WriteAllCookie(cookies);
+
+        driver.get("https://dzen.ru/id/660257ca637a7913328b0bf3");
+        ReadAllCookie("src/test/resources/cookie.txt");
+        driver.navigate().refresh();
+    }
 
       @Test
     @DisplayName("Условия Явного ожидания Wait")
@@ -143,7 +156,7 @@ public class JAVATest extends Abstract {
         idea = new IDEA(driver);
         driver.get(idea.Idea);
 
-        if (IfWaitElement(idea.LocationDeveloperTools("CLion"), 1)) {
+        if (IfElementTime(idea.LocationDeveloperTools("CLion"), 1)) {
             System.out.println("Элемент обнаружен на странице выполняем следующий перечень действий");
         } else {
             System.out.println("Элемент НЕ обнаружен на странице выполняем следующий перечень действий");

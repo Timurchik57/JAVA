@@ -22,6 +22,7 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
 import java.util.Properties;
+import java.util.Set;
 
 import static org.openqa.selenium.support.ui.ExpectedConditions.visibilityOfElementLocated;
 
@@ -40,7 +41,7 @@ abstract public class Abstract {
     public static ByteArrayOutputStream buffer;
 
     public static void setUp() {
-        WebDriverManager.chromedriver().driverVersion("124.0.6367.119").setup();
+        WebDriverManager.chromedriver().setup();
         chromeOptions = new ChromeOptions();
         // chromeOptions.setHeadless(true);
         //chromeOptions.addArguments("window-size=1920, 1080");
@@ -130,38 +131,6 @@ abstract public class Abstract {
         element.click();
     }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    @Step("Проверка появится ли элемент {0}, за время - {1}")
-    public boolean IfWaitElement(By locator, Integer time) {
-        waitTime = new WebDriverWait(driver, time);
-        try {
-            waitTime.until(visibilityOfElementLocated(locator));
-            return true;
-        } catch (TimeoutException e) {
-            System.out.println("Элемент отсутствует на странице");
-            return false;
-        }
-    }
-
     @Step("Ввод текста под Shadow root")
     public static void inputWord(WebElement element, String word) {
         JavascriptExecutor js = (JavascriptExecutor) driver;
@@ -202,5 +171,36 @@ abstract public class Abstract {
                 new String(Files.readAllBytes(path), charset).replace(Word, Replace)
                         .getBytes(charset)
         );
+    }
+
+    @Step("Записать все cookie в файл")
+    public void WriteAllCookie (Set<Cookie> cookies) {
+
+        File cookieFile = new File("src/test/resources/cookie.txt");
+
+        try(FileWriter writer = new FileWriter(cookieFile)) {
+            for (Cookie cookie : cookies) {
+                writer.write(cookie.getName() + "=" + cookie.getValue() + "\n");
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @Step("Использовать все cookie из файла")
+    public void ReadAllCookie (String file) {
+        try (BufferedReader reader = new BufferedReader(new FileReader(file))){
+            String line;
+            while ((line = reader.readLine()) != null) {
+                String [] parts = line.split("=");
+                if(parts.length == 2) {
+                    String name = parts[0];
+                    String value = parts[1];
+                    driver.manage().addCookie(new Cookie(name, value));
+                }
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 }
