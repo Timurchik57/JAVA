@@ -7,6 +7,7 @@ import io.qameta.allure.Step;
 import org.apache.commons.io.output.TeeOutputStream;
 import org.junit.jupiter.api.BeforeEach;
 
+import org.junit.jupiter.api.TestInfo;
 import org.openqa.selenium.*;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
@@ -37,16 +38,18 @@ abstract public class Abstract {
     public static Actions actions;
     public Properties props;
     public SQL sql;
+    public TestInfo testInfo;
 
     public static ByteArrayOutputStream buffer;
+    public static String remote_url_chrome;
 
     public static void setUp() {
         WebDriverManager.chromedriver().setup();
         chromeOptions = new ChromeOptions();
-        // chromeOptions.setHeadless(true);
-        //chromeOptions.addArguments("window-size=1920, 1080");
+         chromeOptions.setHeadless(true);
+        chromeOptions.addArguments("window-size=1920, 1080");
         driver = new ChromeDriver((chromeOptions));
-        driver.manage().window().maximize();
+        //driver.manage().window().maximize();
         wait = new WebDriverWait(driver, 20);
         actions = new Actions(driver);
     }
@@ -61,7 +64,14 @@ abstract public class Abstract {
         props.load(in);
         in.close();
         setUp();
-        terminal();
+        terminal(); // Для записи данных из консоли
+        InputClass(); // Для сохраниения названий методов и классов
+    }
+
+    /** Инициализация специальной переменной для сохранения названия класса теста */
+    @BeforeEach
+    public void GetMethod (TestInfo testInfo) {
+        this.testInfo = testInfo;
     }
 
     @Attachment
@@ -77,6 +87,12 @@ abstract public class Abstract {
         System.setOut(new PrintStream(teeStream));
     }
 
+    /**
+     * Метод для чтения переменной из property
+     * @params FileName - путь до файла с переменными окружения, например (src/test/resources/my.properties)
+     * @params NameProp - название переменной, из корой хотим взять значение
+     * @params Input - значение переменной, которую хотим сохранить
+     */
     @Step("Запись в Properties переменной {1} = {2}")
     public static void InputProp(String FileName, String NameProp, String Input) throws IOException {
         FileInputStream in = new FileInputStream(FileName);
@@ -89,6 +105,20 @@ abstract public class Abstract {
         out.close();
     }
 
+    /**
+     * Метод для чтения переменной из property
+     * @params FileName - путь до файла с переменными окружения, например (src/test/resources/my.properties)
+     * @params NameProp - название переменной, из корой хотим взять значение
+     */
+    @Step("Чтение переменной {1} из Properties")
+    public static String ReadProp(String FileName, String NameProp) throws IOException {
+        FileInputStream in = new FileInputStream(FileName);
+        Properties props = new Properties();
+        props.load(in);
+        in.close();
+        String Name = props.getProperty(NameProp);
+        return Name;
+    }
     @Step("Ожидание появления элемента {0}")
     public void WaitElement(By locator) {
         wait.until(visibilityOfElementLocated(locator));
@@ -203,4 +233,22 @@ abstract public class Abstract {
             e.printStackTrace();
         }
     }
+
+    @Step("Метод записи названия класса Теста")
+    public void InputClass () throws IOException {
+        //Запись класса
+        String className = this.getClass().getSimpleName();
+
+        //Запись названия метода
+        String methodName = testInfo.getTestMethod().orElseThrow().getName();
+
+        //Запись названия DisplayName теста
+        String DisplayNameTest = testInfo.getDisplayName();
+
+
+        InputProp("src/test/resources/my.properties","className", className);
+        InputProp("src/test/resources/my.properties","methodName", methodName);
+        InputProp("src/test/resources/my.properties","DisplayNameTest", DisplayNameTest);
+    }
+
 }
