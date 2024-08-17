@@ -43,6 +43,17 @@ public class JAVATest extends Abstract {
     CrosBrowser crosBrowser;
 
     @Test
+    @DisplayName("Статья по перезапуску тестов")
+    public void RebaseTest() throws InterruptedException, IOException {
+
+        System.out.println(ReadProp("src/test/resources/my.properties", "className"));
+        System.out.println(ReadProp("src/test/resources/my.properties", "methodName"));
+        System.out.println(ReadProp("src/test/resources/my.properties", "DisplayNameTest"));
+
+        Assertions.assertEquals(1,2);
+    }
+
+    @Test
     public void Cookies () throws IOException {
         driver.get("https://dzen.ru/id/660257ca637a7913328b0bf3");
         Set<Cookie> cookies = driver.manage().getCookies();
@@ -136,6 +147,7 @@ public class JAVATest extends Abstract {
         String publicStr  = driver.findElement(idea.DeveloperToolsName).getText();
 
         InputProp("src/test/resources/my.properties", "Name2", publicStr);
+        ReadProp("src/test/resources/my.properties", "Name2");
 
         System.out.println(props.getProperty("Name2"));
     }
