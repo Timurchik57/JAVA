@@ -14,6 +14,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;
 
+import static UI.Abstract.*;
 import static UI.Abstract.driver;
 
 
@@ -34,7 +35,13 @@ public class TestListener implements TestWatcher {
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
-        Abstract.LogConsole("console.txt");
+        LogConsole("console.txt");
+
+        //Если тест упал то пробуем запустить его ещё раз
+        if (ReadProp("src/test/resources/my.properties", ReadProp("src/test/resources/my.properties", "methodName")).equals("0")) {
+            InputProp("src/test/resources/my.properties", ReadProp("src/test/resources/my.properties", "methodName"), "1");
+            RebaseTests();
+        }
     }
 
     @SneakyThrows
@@ -52,6 +59,6 @@ public class TestListener implements TestWatcher {
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
-        Abstract.LogConsole("console.txt");
+        LogConsole("console.txt");
     }
 }
