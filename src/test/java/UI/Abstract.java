@@ -5,6 +5,7 @@ import io.github.bonigarcia.wdm.WebDriverManager;
 import io.qameta.allure.Attachment;
 import io.qameta.allure.Step;
 import org.apache.commons.io.output.TeeOutputStream;
+import org.apache.hc.core5.util.TextUtils;
 import org.junit.jupiter.api.BeforeEach;
 
 import org.junit.jupiter.api.TestInfo;
@@ -13,6 +14,8 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.firefox.FirefoxOptions;
 import org.openqa.selenium.interactions.Actions;
+import org.openqa.selenium.safari.SafariDriver;
+import org.openqa.selenium.safari.SafariOptions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.io.*;
@@ -31,6 +34,7 @@ abstract public class Abstract {
 
     public static WebDriver driver;
     public static ChromeOptions chromeOptions;
+    public static SafariOptions safariOptions;
     public static FirefoxOptions foxOptions;
     public static WebDriverWait wait;
     public static WebDriverWait waitTime;
@@ -43,13 +47,16 @@ abstract public class Abstract {
     public static ByteArrayOutputStream buffer;
     public static String remote_url_chrome;
 
+    public static boolean RebaseTest = true;
+    public String StrRebase;
+
     public static void setUp() {
         WebDriverManager.chromedriver().setup();
         chromeOptions = new ChromeOptions();
-         chromeOptions.setHeadless(true);
-        chromeOptions.addArguments("window-size=1920, 1080");
+        //chromeOptions.setHeadless(true);
+        //chromeOptions.addArguments("window-size=1920, 1080");
         driver = new ChromeDriver((chromeOptions));
-        //driver.manage().window().maximize();
+        driver.manage().window().maximize();
         wait = new WebDriverWait(driver, 20);
         actions = new Actions(driver);
     }
@@ -66,6 +73,24 @@ abstract public class Abstract {
         setUp();
         terminal(); // Для записи данных из консоли
         InputClass(); // Для сохраниения названий методов и классов
+
+        //Переменная для перезапуска тестов
+        StrRebase = ReadProp("src/test/resources/my.properties", ReadProp("src/test/resources/my.properties", "methodName"));
+        if (TextUtils.isEmpty(StrRebase)) {
+            InputProp("src/test/resources/my.properties", ReadProp("src/test/resources/my.properties", "methodName"), "0");
+        }
+    }
+
+    @Step("Метод для перезапуска упавшего теста")
+    public static void RebaseTests () throws  IOException {
+        String runTest = "mvn test -Dtest=\""+ReadProp("src/test/resources/my.properties", "className")+"#"+ReadProp("src/test/resources/my.properties", "methodName")+"\"";
+
+        Charset charset = StandardCharsets.UTF_8;
+        Path path = Paths.get("src/test/resources/RebaseTestLocal.bat");
+        byte[] bytes = runTest.getBytes(charset);
+        Files.write(path, bytes);
+
+        Runtime.getRuntime().exec("src/test/resources/RebaseTestLocal.bat /C start");
     }
 
     /** Инициализация специальной переменной для сохранения названия класса теста */
