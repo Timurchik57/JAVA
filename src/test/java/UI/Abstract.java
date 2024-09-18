@@ -12,10 +12,7 @@ import org.junit.jupiter.api.TestInfo;
 import org.openqa.selenium.*;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
-import org.openqa.selenium.firefox.FirefoxOptions;
 import org.openqa.selenium.interactions.Actions;
-import org.openqa.selenium.safari.SafariDriver;
-import org.openqa.selenium.safari.SafariOptions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.io.*;
@@ -34,8 +31,6 @@ abstract public class Abstract {
 
     public static WebDriver driver;
     public static ChromeOptions chromeOptions;
-    public static SafariOptions safariOptions;
-    public static FirefoxOptions foxOptions;
     public static WebDriverWait wait;
     public static WebDriverWait waitTime;
     public static WebDriverWait waitTime2;
@@ -45,7 +40,7 @@ abstract public class Abstract {
     public TestInfo testInfo;
 
     public static ByteArrayOutputStream buffer;
-    public static String remote_url_chrome;
+    public static String remote_url_chrome = "Значение для примера";
 
     public static boolean RebaseTest = true;
     public String StrRebase;
@@ -83,14 +78,26 @@ abstract public class Abstract {
 
     @Step("Метод для перезапуска упавшего теста")
     public static void RebaseTests () throws  IOException {
-        String runTest = "mvn test -Dtest=\""+ReadProp("src/test/resources/my.properties", "className")+"#"+ReadProp("src/test/resources/my.properties", "methodName")+"\"";
+        String str = "";
+        String Word = "";
+        if (RebaseTest) {
+            if (TextUtils.isEmpty(remote_url_chrome)) {
+                str = "RebaseTestLocal.bat";
 
-        Charset charset = StandardCharsets.UTF_8;
-        Path path = Paths.get("src/test/resources/RebaseTestLocal.bat");
-        byte[] bytes = runTest.getBytes(charset);
-        Files.write(path, bytes);
+                Word = "mvn test -Dtest=\"" + ReadProp("src/test/resources/my.properties", "className") + "#" + ReadProp("src/test/resources/my.properties", "methodName") + "\"";
+            } else {
+                str = "RebaseTestLocal.sh";
 
-        Runtime.getRuntime().exec("src/test/resources/RebaseTestLocal.bat /C start");
+                Word = "mvn test -Dtest=\"" + ReadProp("src/test/resources/my.properties", "className") + "#" + ReadProp("src/test/resources/my.properties", "methodName") + "\" -DUrlChrome=" + remote_url_chrome + "";
+            }
+
+            Charset charset = StandardCharsets.UTF_8;
+            Path path = Paths.get("src/test/resources/" + str + "");
+            byte[] bytes = Word.getBytes(charset);
+            Files.write(path, bytes);
+
+            Runtime.getRuntime().exec("src/test/resources/" + str + " /C start");
+        }
     }
 
     /** Инициализация специальной переменной для сохранения названия класса теста */
