@@ -9,6 +9,9 @@ COPY . /app
 
 RUN mvn clean install -Dmaven.test.skip=true
 
-COPY entrypoint.sh /app/entrypoint.sh
-RUN chmod +x /app/entrypoint.sh
-ENTRYPOINT ["/app/entrypoint.sh"]
+ENV TestRun ''
+CMD $TestRun
+
+#COPY entrypoint.sh /app/entrypoint.sh
+#RUN chmod +x /app/entrypoint.sh
+#ENTRYPOINT ["/app/entrypoint.sh"]

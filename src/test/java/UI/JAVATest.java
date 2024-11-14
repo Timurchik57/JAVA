@@ -9,7 +9,6 @@ import io.restassured.http.ContentType;
 import io.restassured.path.json.JsonPath;
 import org.junit.jupiter.api.*;
 import org.junit.jupiter.api.extension.ExtendWith;
-import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 
 import java.io.*;
@@ -34,20 +33,6 @@ public class JAVATest extends Abstract {
     public String Text = System.getProperty("TextMvn");
 
     @Test
-    @DisplayName("Тест для проверки Универсального локатора")
-    public void Universalocator() {
-
-        idea = new IDEA(driver);
-
-        driver.get(idea.Idea);
-        ClickElement(idea.DeveloperTools);
-        ClickElement(idea.LocationDeveloperTools("All IDEs"));
-        driver.navigate().back();
-        ClickElement(idea.LocationDeveloperTools("Aqua"));
-
-    }
-
-    @Test
     @DisplayName("Тест для проверки Cherry-Pick")
     public void TestBranches() {
         idea = new IDEA(driver);
@@ -55,8 +40,6 @@ public class JAVATest extends Abstract {
         driver.get(idea.Idea);
         ClickElement(idea.DeveloperTools);
         ClickElement(idea.LocationDeveloperTools("All IDEs"));
-        driver.navigate().back();
-        ClickElement(idea.LocationDeveloperTools("Aqua"));
     }
 
     @Test

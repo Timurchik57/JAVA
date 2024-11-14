@@ -9,6 +9,7 @@ import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.logging.LogType;
 
+
 import static UI.Abstract.*;
 
 public class TestListener implements TestWatcher {
@@ -20,15 +21,15 @@ public class TestListener implements TestWatcher {
                 ((TakesScreenshot) driver).getScreenshotAs(OutputType.BYTES));
 
         if (Browser.contains("Chrome")) {
-            Allure.addAttachment("Логи после падения теста: ",
-                    String.valueOf(driver.manage().logs().get(LogType.BROWSER).getAll()));
+            Allure.addAttachment("Логи после падения теста: ", String.valueOf(driver.manage().logs().get(LogType.BROWSER).getAll()));
             WebDriverManager.chromedriver().quit();
         } else {
-            Allure.getLifecycle().addAttachment("Скриншот на месте падения теста", "image/png", "png",
-                    ((TakesScreenshot) driver).getScreenshotAs(OutputType.BYTES));
             WebDriverManager.firefoxdriver().quit();
         }
-
+        // После каждого теста, сохраняем название его класса, чтобы в дальнейшем перезапустить его
+        if (ReadProp("src/test/resources/my.properties", "IfCountListner").contains("web") == true) {
+            InputClassFile();
+        }
         driver.quit();
     }
 
@@ -39,15 +40,11 @@ public class TestListener implements TestWatcher {
                 ((TakesScreenshot) driver).getScreenshotAs(OutputType.BYTES));
 
         if (Browser.contains("Chrome")) {
-            Allure.addAttachment("Логи после падения теста: ",
-                    String.valueOf(driver.manage().logs().get(LogType.BROWSER).getAll()));
+            Allure.addAttachment("Логи после падения теста: ", String.valueOf(driver.manage().logs().get(LogType.BROWSER).getAll()));
             WebDriverManager.chromedriver().quit();
         } else {
-            Allure.getLifecycle().addAttachment("Скриншот на месте падения теста", "image/png", "png",
-                    ((TakesScreenshot) driver).getScreenshotAs(OutputType.BYTES));
             WebDriverManager.firefoxdriver().quit();
         }
-
         driver.quit();
     }
 }

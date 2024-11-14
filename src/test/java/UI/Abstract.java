@@ -3,15 +3,15 @@ package UI;
 import UI.PageObject.SQL;
 import io.github.bonigarcia.wdm.WebDriverManager;
 import io.qameta.allure.Step;
+import org.apache.hc.core5.util.TextUtils;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.TestInfo;
 import org.openqa.selenium.*;
-import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.firefox.FirefoxOptions;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.remote.LocalFileDetector;
 import org.openqa.selenium.remote.RemoteWebDriver;
-import org.openqa.selenium.support.events.EventFiringWebDriver;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.io.*;
@@ -23,6 +23,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
+import java.util.Properties;
 
 import static org.openqa.selenium.support.ui.ExpectedConditions.visibilityOfElementLocated;
 
@@ -38,6 +39,7 @@ abstract public class Abstract {
     public SQL sql;
     public static String remote_url_chrome = System.getProperty("UrlChrome");
     public static String Browser;
+    public TestInfo testInfo;
 
     public static void setUp() throws MalformedURLException {
         Browser = "Chrome";
@@ -67,6 +69,8 @@ abstract public class Abstract {
         sql = new SQL();
         sql.Connect();
         setUp();
+        InputProp("src/test/resources/my.properties", "IfCountListner", "web");
+        InputClass();
     }
 
     @Step("Ожидание появления эдемента {0}")
@@ -123,5 +127,87 @@ abstract public class Abstract {
                 new String(Files.readAllBytes(path), charset).replace(Word, Replace)
                         .getBytes(charset)
         );
+    }
+
+    /**
+     * Метод для замены значения в property
+     * @param FileName - путь до файла с переменными окружения, например (src/test/resources/my.properties)
+     * @param NameProp - название переменной
+     * @param Input - параметр, который хотим указать в переменную
+     */
+    @Step("Запись в Properties переменной {1} = {2}")
+    public static void InputProp(String FileName, String NameProp, String Input) throws IOException {
+        FileInputStream in = new FileInputStream(FileName);
+        Properties props = new Properties();
+        props.load(in);
+        in.close();
+        FileOutputStream out = new FileOutputStream(FileName);
+        props.setProperty(NameProp, Input);
+        props.store(out, null);
+        out.close();
+    }
+
+    /**
+     * Метод для чтения переменной из property
+     * @params FileName - путь до файла с переменными окружения, например (src/test/resources/my.properties)
+     * @params NameProp - название переменной, из корой хотим взять значение
+     */
+    public static String ReadProp(String FileName, String NameProp) throws IOException {
+        FileInputStream in = new FileInputStream(FileName);
+        Properties props = new Properties();
+        props.load(in);
+        in.close();
+        String Name = props.getProperty(NameProp);
+        return Name;
+    }
+
+    /**
+     * Метод записи названия тестового метода в properties
+     */
+    @BeforeEach
+    public void GetMethod(TestInfo testInfo) {
+        this.testInfo = testInfo;
+    }
+
+    /**
+     * Метод записи названия класса выполняемого теста в properties
+     */
+    public void InputClass() throws IOException {
+        //Запись класса
+        String str = this.getClass().getSimpleName();
+
+        //Запись метода
+        String strNameTest = testInfo.getTestMethod().orElseThrow().getName();
+
+        //Запись DisplayName
+        String DisplayNameTest = testInfo.getDisplayName();
+
+        InputProp("src/test/resources/my.properties", "className", str);
+        InputProp("src/test/resources/my.properties", "methodName", strNameTest);
+        InputProp("src/test/resources/my.properties", "displayNameTest", DisplayNameTest);
+    }
+
+    /**
+     * Метод записи названия класса выполняемого теста из properties в Файл
+     */
+    public static void InputClassFile() throws IOException {
+        String str = "";
+        if (TextUtils.isEmpty(remote_url_chrome)) {
+            str = "FiledTests.bat";
+        } else {
+            str = "FiledTests.bat";
+        }
+
+        FileInputStream in = new FileInputStream("src/test/resources/my.properties");
+        Properties props = new Properties();
+        props.load(in);
+        in.close();
+
+        String className = props.getProperty("className");
+        String methodName = props.getProperty("methodName");
+        FileWriter writer = new FileWriter("src/test/resources/"+ str +"", true);
+        BufferedWriter bufferWriter = new BufferedWriter(writer);
+        bufferWriter.write(", " + className + "#" + methodName);
+        bufferWriter.close();
     }
 }
