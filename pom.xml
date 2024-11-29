@@ -22,6 +22,7 @@
         <selenium-java.version>3.141.59</selenium-java.version>
         <webdrivermanager.version>5.5.3</webdrivermanager.version>
         <slf4j-simple.version>2.0.10</slf4j-simple.version>
+        <lambok>1.18.36</lambok>
         <allure.results.directory>target/allure-results</allure.results.directory>
     </properties>
 
@@ -252,7 +253,7 @@
         <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
-            <version>RELEASE</version>
+            <version>${lambok}</version>
             <scope>test</scope>
         </dependency>
 
