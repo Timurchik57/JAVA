@@ -21,7 +21,7 @@
         <reportVersion.version>2.4.1</reportVersion.version>
         <selenium-java.version>3.141.59</selenium-java.version>
         <webdrivermanager.version>5.5.3</webdrivermanager.version>
-        <slf4j-simple.version>1.7.30</slf4j-simple.version>
+        <slf4j-simple.version>2.0.10</slf4j-simple.version>
         <allure.results.directory>target/allure-results</allure.results.directory>
     </properties>
 
