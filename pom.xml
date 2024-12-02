@@ -37,6 +37,12 @@
                         -javaagent:"${settings.localRepository}/org/aspectj/aspectjweaver/${aspectj.version}/aspectjweaver-${aspectj.version}.jar"
                         -Dfile.encoding=UTF-8
                     </argLine>
+                    <properties>
+                        <property>
+                            <name>listener</name>
+                            <value>jetbrains.buildServer.junit.TeamCityTestListener</value>
+                        </property>
+                    </properties>
                 </configuration>
                 <dependencies>
                     <dependency>
