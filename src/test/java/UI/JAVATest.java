@@ -34,6 +34,12 @@ public class JAVATest extends Abstract {
 
     @Test
     @DisplayName("Тест для проверки Cherry-Pick")
+    public void InputFile() throws IOException {
+        InputProp("src/test/resources/my.properties", "Token_TmTest", "Token");
+    }
+
+    @Test
+    @DisplayName("Тест для проверки Cherry-Pick")
     public void TestBranches() {
         idea = new IDEA(driver);
 
