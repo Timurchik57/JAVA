@@ -35,13 +35,14 @@ public class JAVATest extends Abstract {
     @Test
     @DisplayName("Тест для проверки Cherry-Pick")
     public void ReadFile() throws IOException {
+        System.out.println(ReadProp("src/test/resources/my.properties", "Token_TmTest"));
         ReadProp("src/test/resources/my.properties", "Token_TmTest");
     }
 
     @Test
     @DisplayName("Тест для проверки Cherry-Pick")
     public void InputFile() throws IOException {
-        InputProp("src/test/resources/my.properties", "Token_TmTest", "Token");
+        InputProp("src/test/resources/my.properties", "Token_TmTest", "Proverka");
     }
 
     @Test
