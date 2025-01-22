@@ -22,6 +22,18 @@ import java.util.Arrays;
 public class After extends Abstract{
 
     @Test
+    @DisplayName("Запускаем тесты, которые упали")
+    public void TestFiled() throws IOException {
+        String str = "";
+        if (TextUtils.isEmpty(remote_url_chrome)) {
+            str = "FiledTests.bat";
+        } else {
+            str = "FiledTests.bat";
+        }
+        Runtime.getRuntime().exec("src/test/resources/" + str + " /C start");
+    }
+
+    @Test
     @DisplayName("Редактируем файл запуска упавших тестов")
     public void AfterFiledTest() throws IOException {
         String path = "";
