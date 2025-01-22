@@ -2,7 +2,9 @@ package UI;
 
 import UI.PageObject.SQL;
 import io.github.bonigarcia.wdm.WebDriverManager;
+import io.qameta.allure.Attachment;
 import io.qameta.allure.Step;
+import org.apache.commons.io.output.TeeOutputStream;
 import org.apache.hc.core5.util.TextUtils;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.TestInfo;
@@ -41,6 +43,11 @@ abstract public class Abstract {
     public static String Browser;
     public TestInfo testInfo;
 
+    /**
+     * Нужно для записи лога из терминала в файл
+     */
+    public static ByteArrayOutputStream buffer;
+
     public static void setUp() throws MalformedURLException {
         Browser = "Chrome";
         if(Browser.contains("Chrome")) {
@@ -71,6 +78,21 @@ abstract public class Abstract {
         setUp();
         InputProp("src/test/resources/my.properties", "IfCountListner", "web");
         InputClass();
+        terminal();
+    }
+
+    @Attachment
+    @Step("Создание файла с логом из консоли для Allure")
+    public static byte[] LogConsole(String name) throws IOException {
+        return Files.readAllBytes(Paths.get("src/test/resources", name));
+    }
+
+    @Step("Запись данных из консоли в файл")
+    public void terminal() {
+        buffer = new ByteArrayOutputStream();
+        OutputStream teeStream = new TeeOutputStream(System.out, buffer);
+        // После этой строки любой вывод будет сохраняться в buffer
+        System.setOut(new PrintStream(teeStream));
     }
 
     @Step("Ожидание появления эдемента {0}")

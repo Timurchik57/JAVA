@@ -9,6 +9,11 @@ import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.logging.LogType;
 
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.OutputStream;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 
 import static UI.Abstract.*;
 
@@ -21,7 +26,7 @@ public class TestListener implements TestWatcher {
                 ((TakesScreenshot) driver).getScreenshotAs(OutputType.BYTES));
 
         if (Browser.contains("Chrome")) {
-            Allure.addAttachment("Логи после падения теста: ", String.valueOf(driver.manage().logs().get(LogType.BROWSER).getAll()));
+            Allure.addAttachment("Логи после успешного теста: ", String.valueOf(driver.manage().logs().get(LogType.BROWSER).getAll()));
             WebDriverManager.chromedriver().quit();
         } else {
             WebDriverManager.firefoxdriver().quit();
@@ -30,6 +35,14 @@ public class TestListener implements TestWatcher {
         if (ReadProp("src/test/resources/my.properties", "IfCountListner").contains("web") == true) {
             InputClassFile();
         }
+        // Сохраняем лог консоли в файл
+        try(OutputStream fileStream = new FileOutputStream("src/test/resources/console.txt")) {
+            buffer.writeTo(fileStream);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+        Allure.addAttachment("Данные из консоли: ", new String(Files.readAllBytes(Paths.get("src/test/resources/console.txt"))));
+
         driver.quit();
     }
 
@@ -45,6 +58,15 @@ public class TestListener implements TestWatcher {
         } else {
             WebDriverManager.firefoxdriver().quit();
         }
+
+        // Сохраняем лог консоли в файл
+        try(OutputStream fileStream = new FileOutputStream("src/test/resources/console.txt")) {
+            buffer.writeTo(fileStream);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+        Allure.addAttachment("Данные из консоли: ", new String(Files.readAllBytes(Paths.get("src/test/resources/console.txt"))));
+
         driver.quit();
     }
 }
