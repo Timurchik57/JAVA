@@ -32,7 +32,8 @@ public class TestListener implements TestWatcher {
             WebDriverManager.firefoxdriver().quit();
         }
         // После каждого теста, сохраняем название его класса, чтобы в дальнейшем перезапустить его
-        if (ReadProp("src/test/resources/my.properties", "IfCountListner").contains("web")) {
+        if (ReadProp("src/test/resources/my.properties", "IfCountListner").equals("web") &
+                !ReadProp("src/test/resources/my.properties", "methodName").equals("TestFiled")) {
             InputClassFile();
         }
         // Сохраняем лог консоли в файл
