@@ -35,8 +35,8 @@ public class JAVATest extends Abstract {
     @Test
     @DisplayName("Тест для проверки Cherry-Pick")
     public void NigativeTest() throws IOException {
-        Assertions.assertEquals(1, 2, "Ошибка - не сходится");
         System.out.println("Просто текст для проверки");
+        Assertions.assertEquals(1, 2, "Ошибка - не сходится");
     }
 
     @Test
