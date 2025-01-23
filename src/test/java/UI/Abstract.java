@@ -214,11 +214,6 @@ abstract public class Abstract {
      */
     public static void InputClassFile() throws IOException {
         String str = "";
-        if (TextUtils.isEmpty(remote_url_chrome)) {
-            str = "FiledTests.bat";
-        } else {
-            str = "FiledTests.bat";
-        }
 
         FileInputStream in = new FileInputStream("src/test/resources/my.properties");
         Properties props = new Properties();
@@ -227,9 +222,16 @@ abstract public class Abstract {
 
         String className = props.getProperty("className");
         String methodName = props.getProperty("methodName");
-        FileWriter writer = new FileWriter("src/test/resources/"+ str +"", true);
-        BufferedWriter bufferWriter = new BufferedWriter(writer);
-        bufferWriter.write(", " + className + "#" + methodName);
-        bufferWriter.close();
+        for (int i = 0; i < 2; i++) {
+            if (i == 0) {
+                str = "FiledTests.bat";
+            } else {
+                str = "FiledTests.sh";
+            }
+            FileWriter writer = new FileWriter("src/test/resources/" + str + "", true);
+            BufferedWriter bufferWriter = new BufferedWriter(writer);
+            bufferWriter.write(", " + className + "#" + methodName);
+            bufferWriter.close();
+        }
     }
 }
