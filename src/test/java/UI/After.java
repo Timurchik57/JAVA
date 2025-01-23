@@ -34,7 +34,7 @@ public class After extends Abstract{
 
         String text1 = new String(Files.readAllBytes(Paths.get("src/test/resources/"+str+"")));
         System.out.println("Данные из файла с упавшими тестами - " + text1);
-        //Runtime.getRuntime().exec("src/test/resources/" + str + " /C start");
+     //   Runtime.getRuntime().exec("chmod +x src/test/resources/" + str + " /C start");
 
         // Изменяем права на выполнение для файла .sh
         if (str.endsWith(".sh")) {
