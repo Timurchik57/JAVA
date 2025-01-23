@@ -23,14 +23,32 @@ public class After extends Abstract{
 
     @Test
     @DisplayName("Запускаем тесты, которые упали")
-    public void TestFiled() throws IOException {
+    public void TestFiled() throws IOException, InterruptedException {
         String str = "";
+
         if (TextUtils.isEmpty(remote_url_chrome)) {
             str = "FiledTests.bat";
         } else {
             str = "FiledTests.sh";
         }
-        Runtime.getRuntime().exec("src/test/resources/" + str + " /C start");
+
+        String text1 = new String(Files.readAllBytes(Paths.get("src/test/resources/"+str+"")));
+        System.out.println("Данные из файла с упавшими тестами - " + text1);
+        //Runtime.getRuntime().exec("src/test/resources/" + str + " /C start");
+
+        // Изменяем права на выполнение для файла .sh
+        if (str.endsWith(".sh")) {
+            ProcessBuilder chmodProcess = new ProcessBuilder("chmod", "+x", "src/test/resources/" + str);
+            chmodProcess.inheritIO(); // Это позволит выводить логи в консоль
+            Process chmod = chmodProcess.start();
+            chmod.waitFor(); // Ждем завершения команды chmod
+        }
+
+        // Запускаем скрипт
+        ProcessBuilder runProcess = new ProcessBuilder("src/test/resources/" + str);
+        runProcess.inheritIO(); // Это позволит выводить логи в консоль
+        Process run = runProcess.start();
+        run.waitFor(); // Ждем завершения скрипта
     }
 
     @Test
