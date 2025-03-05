@@ -53,7 +53,7 @@ abstract public class Abstract {
         if(Browser.contains("Chrome")) {
             WebDriverManager.chromedriver().setup();
             chromeOptions = new ChromeOptions();
-            chromeOptions.addArguments("--headless=old");
+            chromeOptions.addArguments("--headless");
             chromeOptions.addArguments("window-size=1920, 1080");
             driver = new RemoteWebDriver(new URL(remote_url_chrome), chromeOptions);
             driver.setFileDetector(new LocalFileDetector());
@@ -61,7 +61,7 @@ abstract public class Abstract {
         if(Browser.contains("FireFox")) {
             WebDriverManager.chromedriver().setup();
             firefoxOptions = new FirefoxOptions();
-            firefoxOptions.addArguments("--headless=old");
+            firefoxOptions.addArguments("--headless");
             firefoxOptions.addArguments("window-size=1920, 1080");
             driver = new RemoteWebDriver(new URL(remote_url_chrome), firefoxOptions);
             driver.setFileDetector(new LocalFileDetector());
