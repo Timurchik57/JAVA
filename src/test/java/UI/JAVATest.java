@@ -33,21 +33,21 @@ public class JAVATest extends Abstract {
     public String Text = System.getProperty("TextMvn");
 
     @Test
-    @DisplayName("Тест для проверки Cherry-Pick")
+    @DisplayName("Негативный тест")
     public void NigativeTest() throws IOException {
         System.out.println("Просто текст для проверки");
         Assertions.assertEquals(1, 2, "Ошибка - не сходится");
     }
 
     @Test
-    @DisplayName("Тест для проверки Cherry-Pick")
+    @DisplayName("Читаем переменную")
     public void ReadFile() throws IOException {
         System.out.println(ReadProp("src/test/resources/my.properties", "Token_TmTest"));
         ReadProp("src/test/resources/my.properties", "Token_TmTest");
     }
 
     @Test
-    @DisplayName("Тест для проверки Cherry-Pick")
+    @DisplayName("Записываем переменную")
     public void InputFile() throws IOException {
         InputProp("src/test/resources/my.properties", "Token_TmTest", "Proverka");
     }

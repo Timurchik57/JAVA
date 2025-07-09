@@ -25,24 +25,31 @@ public class TestListener implements TestWatcher {
         Allure.getLifecycle().addAttachment("Скриншот на месте падения теста", "image/png", "png",
                 ((TakesScreenshot) driver).getScreenshotAs(OutputType.BYTES));
 
-        if (Browser.contains("Chrome")) {
-            Allure.addAttachment("Логи после успешного теста: ", String.valueOf(driver.manage().logs().get(LogType.BROWSER).getAll()));
-            WebDriverManager.chromedriver().quit();
-        } else {
-            WebDriverManager.firefoxdriver().quit();
-        }
-        // После каждого теста, сохраняем название его класса, чтобы в дальнейшем перезапустить его
-        if (ReadProp("src/test/resources/my.properties", "IfCountListner").equals("web") &
-                !ReadProp("src/test/resources/my.properties", "methodName").equals("TestFiled")) {
-            InputClassFile();
-        }
-        // Сохраняем лог консоли в файл
-        try(OutputStream fileStream = new FileOutputStream("src/test/resources/console.txt")) {
-            buffer.writeTo(fileStream);
+        try {
+            if (Browser.contains("Chrome")) {
+                Allure.addAttachment("Логи после успешного теста: ",
+                        String.valueOf(driver.manage().logs().get(LogType.BROWSER).getAll()));
+                WebDriverManager.chromedriver().quit();
+            } else {
+                WebDriverManager.firefoxdriver().quit();
+            }
+            // После каждого теста, сохраняем название его класса, чтобы в дальнейшем перезапустить его
+            if (ReadProp("src/test/resources/my.properties", "IfCountListner").equals("web") &
+                    !ReadProp("src/test/resources/my.properties", "methodName").equals("TestFiled")) {
+                InputClassFile();
+            }
+
+            // Сохраняем лог консоли в файл
+            try (OutputStream fileStream = new FileOutputStream("src/test/resources/console.txt")) {
+                buffer.writeTo(fileStream);
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+            Allure.addAttachment("Данные из консоли: ",
+                    new String(Files.readAllBytes(Paths.get("src/test/resources/console.txt"))));
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
-        Allure.addAttachment("Данные из консоли: ", new String(Files.readAllBytes(Paths.get("src/test/resources/console.txt"))));
 
         driver.quit();
     }
@@ -54,19 +61,25 @@ public class TestListener implements TestWatcher {
                 ((TakesScreenshot) driver).getScreenshotAs(OutputType.BYTES));
 
         if (Browser.contains("Chrome")) {
-            Allure.addAttachment("Логи после падения теста: ", String.valueOf(driver.manage().logs().get(LogType.BROWSER).getAll()));
+            Allure.addAttachment("Логи после падения теста: ",
+                    String.valueOf(driver.manage().logs().get(LogType.BROWSER).getAll()));
             WebDriverManager.chromedriver().quit();
         } else {
             WebDriverManager.firefoxdriver().quit();
         }
 
         // Сохраняем лог консоли в файл
-        try(OutputStream fileStream = new FileOutputStream("src/test/resources/console.txt")) {
+        try (OutputStream fileStream = new FileOutputStream("src/test/resources/console.txt")) {
             buffer.writeTo(fileStream);
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
-        Allure.addAttachment("Данные из консоли: ", new String(Files.readAllBytes(Paths.get("src/test/resources/console.txt"))));
+        try {
+            Allure.addAttachment("Данные из консоли: ",
+                    new String(Files.readAllBytes(Paths.get("src/test/resources/console.txt"))));
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
 
         driver.quit();
     }
