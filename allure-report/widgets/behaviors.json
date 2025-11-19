@@ -1,0 +1,1 @@
+{"total":2,"items":[{"uid":"dbd2727fddaab22a18f7132cd3db662f","name":"Тесты на вебе","statistic":{"failed":1,"broken":0,"skipped":0,"passed":0,"unknown":0,"total":1}},{"uid":"a7efdae3bc0c927bcb560256ac620edf","name":"Тесты на сайте IDEA","statistic":{"failed":0,"broken":0,"skipped":0,"passed":1,"unknown":0,"total":1}}]}

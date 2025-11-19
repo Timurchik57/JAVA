@@ -1,0 +1,236 @@
+Request method:	GET
+Request URI:	https://reqres.in/api/users?page=2
+Proxy:			<none>
+Request params:	<none>
+Query params:	<none>
+Form params:	<none>
+Path params:	<none>
+Headers:		Accept=*/*
+				Content-Type=application/json
+Cookies:		<none>
+Multiparts:		<none>
+Body:			<none>
+Request URI:	https://reqres.in/api/users?page=2
+HTTP/1.1 200 OK
+Date: Wed, 09 Jul 2025 11:24:13 GMT
+Content-Type: application/json; charset=utf-8
+Transfer-Encoding: chunked
+Connection: keep-alive
+Content-Encoding: gzip
+Report-To: {"group":"heroku-nel","max_age":3600,"endpoints":[{"url":"https://nel.heroku.com/reports?ts=1752057949&sid=c4c9725f-1ab0-44d8-820f-430df2718e11&s=VcGDhfbuGHfULwWEugBGOaYrZEGFYycYwwvz%2F7ih3dA%3D"}]}
+Reporting-Endpoints: heroku-nel=https://nel.heroku.com/reports?ts=1752057949&sid=c4c9725f-1ab0-44d8-820f-430df2718e11&s=VcGDhfbuGHfULwWEugBGOaYrZEGFYycYwwvz%2F7ih3dA%3D
+Nel: {"report_to":"heroku-nel","max_age":3600,"success_fraction":0.005,"failure_fraction":0.05,"response_headers":["Via"]}
+Access-Control-Allow-Origin: *
+X-Request-Id: a70fc635-d74c-4d0f-8fec-fb72efe894fe
+X-Content-Type-Options: nosniff
+X-Frame-Options: DENY
+X-Xss-Protection: 1; mode=block
+Referrer-Policy: strict-origin-when-cross-origin
+Ratelimit-Policy: 100;w=60
+Ratelimit-Limit: 100
+Ratelimit-Remaining: 98
+Ratelimit-Reset: 60
+Etag: W/"440-ZjsmMKR8P3usr2uJZbOCGCxC3Uw"
+Via: 1.1 vegur
+Cache-Control: max-age=14400
+CF-Cache-Status: HIT
+Age: 2304
+Vary: Accept-Encoding
+Server: cloudflare
+CF-RAY: 95c774255e2e9d91-DME
+server-timing: cfL4;desc="?proto=TCP&rtt=54805&min_rtt=48945&rtt_var=17762&sent=6&recv=6&lost=0&retrans=0&sent_bytes=3107&recv_bytes=807&delivery_rate=69266&cwnd=138&unsent_bytes=0&cid=8d297bf8c6a5744c&ts=164&x=0"
+
+{
+    "page": 2,
+    "per_page": 6,
+    "total": 12,
+    "total_pages": 2,
+    "data": [
+        {
+            "id": 7,
+            "email": "michael.lawson@reqres.in",
+            "first_name": "Michael",
+            "last_name": "Lawson",
+            "avatar": "https://reqres.in/img/faces/7-image.jpg"
+        },
+        {
+            "id": 8,
+            "email": "lindsay.ferguson@reqres.in",
+            "first_name": "Lindsay",
+            "last_name": "Ferguson",
+            "avatar": "https://reqres.in/img/faces/8-image.jpg"
+        },
+        {
+            "id": 9,
+            "email": "tobias.funke@reqres.in",
+            "first_name": "Tobias",
+            "last_name": "Funke",
+            "avatar": "https://reqres.in/img/faces/9-image.jpg"
+        },
+        {
+            "id": 10,
+            "email": "byron.fields@reqres.in",
+            "first_name": "Byron",
+            "last_name": "Fields",
+            "avatar": "https://reqres.in/img/faces/10-image.jpg"
+        },
+        {
+            "id": 11,
+            "email": "george.edwards@reqres.in",
+            "first_name": "George",
+            "last_name": "Edwards",
+            "avatar": "https://reqres.in/img/faces/11-image.jpg"
+        },
+        {
+            "id": 12,
+            "email": "rachel.howell@reqres.in",
+            "first_name": "Rachel",
+            "last_name": "Howell",
+            "avatar": "https://reqres.in/img/faces/12-image.jpg"
+        }
+    ],
+    "support": {
+        "url": "https://contentcaddy.io?utm_source=reqres&utm_medium=json&utm_campaign=referral",
+        "text": "Tired of writing endless social media content? Let Content Caddy generate it for you."
+    }
+}
+Request method:	GET
+Request URI:	https://reqres.in/api/users?page=2
+Proxy:			<none>
+Request params:	<none>
+Query params:	<none>
+Form params:	<none>
+Path params:	<none>
+Headers:		Accept=*/*
+				Content-Type=application/json
+Cookies:		<none>
+Multiparts:		<none>
+Body:			<none>
+HTTP/1.1 200 OK
+Date: Wed, 09 Jul 2025 11:24:14 GMT
+Content-Type: application/json; charset=utf-8
+Transfer-Encoding: chunked
+Connection: keep-alive
+Content-Encoding: gzip
+Report-To: {"group":"heroku-nel","max_age":3600,"endpoints":[{"url":"https://nel.heroku.com/reports?ts=1752057949&sid=c4c9725f-1ab0-44d8-820f-430df2718e11&s=VcGDhfbuGHfULwWEugBGOaYrZEGFYycYwwvz%2F7ih3dA%3D"}]}
+Reporting-Endpoints: heroku-nel=https://nel.heroku.com/reports?ts=1752057949&sid=c4c9725f-1ab0-44d8-820f-430df2718e11&s=VcGDhfbuGHfULwWEugBGOaYrZEGFYycYwwvz%2F7ih3dA%3D
+Nel: {"report_to":"heroku-nel","max_age":3600,"success_fraction":0.005,"failure_fraction":0.05,"response_headers":["Via"]}
+Access-Control-Allow-Origin: *
+X-Request-Id: a70fc635-d74c-4d0f-8fec-fb72efe894fe
+X-Content-Type-Options: nosniff
+X-Frame-Options: DENY
+X-Xss-Protection: 1; mode=block
+Referrer-Policy: strict-origin-when-cross-origin
+Ratelimit-Policy: 100;w=60
+Ratelimit-Limit: 100
+Ratelimit-Remaining: 98
+Ratelimit-Reset: 60
+Etag: W/"440-ZjsmMKR8P3usr2uJZbOCGCxC3Uw"
+Via: 1.1 vegur
+Cache-Control: max-age=14400
+CF-Cache-Status: HIT
+Age: 2305
+Vary: Accept-Encoding
+Server: cloudflare
+CF-RAY: 95c7742c8d1de91d-DME
+server-timing: cfL4;desc="?proto=TCP&rtt=50631&min_rtt=48973&rtt_var=14664&sent=6&recv=6&lost=0&retrans=0&sent_bytes=3105&recv_bytes=807&delivery_rate=80565&cwnd=148&unsent_bytes=0&cid=fe0e9dcfa4924c67&ts=200&x=0"
+
+{
+    "page": 2,
+    "per_page": 6,
+    "total": 12,
+    "total_pages": 2,
+    "data": [
+        {
+            "id": 7,
+            "email": "michael.lawson@reqres.in",
+            "first_name": "Michael",
+            "last_name": "Lawson",
+            "avatar": "https://reqres.in/img/faces/7-image.jpg"
+        },
+        {
+            "id": 8,
+            "email": "lindsay.ferguson@reqres.in",
+            "first_name": "Lindsay",
+            "last_name": "Ferguson",
+            "avatar": "https://reqres.in/img/faces/8-image.jpg"
+        },
+        {
+            "id": 9,
+            "email": "tobias.funke@reqres.in",
+            "first_name": "Tobias",
+            "last_name": "Funke",
+            "avatar": "https://reqres.in/img/faces/9-image.jpg"
+        },
+        {
+            "id": 10,
+            "email": "byron.fields@reqres.in",
+            "first_name": "Byron",
+            "last_name": "Fields",
+            "avatar": "https://reqres.in/img/faces/10-image.jpg"
+        },
+        {
+            "id": 11,
+            "email": "george.edwards@reqres.in",
+            "first_name": "George",
+            "last_name": "Edwards",
+            "avatar": "https://reqres.in/img/faces/11-image.jpg"
+        },
+        {
+            "id": 12,
+            "email": "rachel.howell@reqres.in",
+            "first_name": "Rachel",
+            "last_name": "Howell",
+            "avatar": "https://reqres.in/img/faces/12-image.jpg"
+        }
+    ],
+    "support": {
+        "url": "https://contentcaddy.io?utm_source=reqres&utm_medium=json&utm_campaign=referral",
+        "text": "Tired of writing endless social media content? Let Content Caddy generate it for you."
+    }
+}
+Request method:	POST
+Request URI:	https://reqres.in/api/users
+Proxy:			<none>
+Request params:	<none>
+Query params:	<none>
+Form params:	<none>
+Path params:	<none>
+Headers:		Accept=*/*
+				Content-Type=application/json
+Cookies:		<none>
+Multiparts:		<none>
+Body:
+{
+    "name": "TEST",
+    "job": "TEST"
+}
+HTTP/1.1 401 Unauthorized
+Date: Wed, 09 Jul 2025 11:24:14 GMT
+Content-Type: application/json; charset=utf-8
+Content-Length: 72
+Connection: keep-alive
+CF-RAY: 95c7742e38e7f0ff-DME
+Report-To: {"group":"heroku-nel","max_age":3600,"endpoints":[{"url":"https://nel.heroku.com/reports?ts=1752060254&sid=c4c9725f-1ab0-44d8-820f-430df2718e11&s=lSs9eBJe7ZweZhAeri9nL2TaJJkztRkIo4K9pxhS8sw%3D"}]}
+Reporting-Endpoints: heroku-nel=https://nel.heroku.com/reports?ts=1752060254&sid=c4c9725f-1ab0-44d8-820f-430df2718e11&s=lSs9eBJe7ZweZhAeri9nL2TaJJkztRkIo4K9pxhS8sw%3D
+Nel: {"report_to":"heroku-nel","max_age":3600,"success_fraction":0.005,"failure_fraction":0.05,"response_headers":["Via"]}
+Access-Control-Allow-Origin: *
+X-Request-Id: 1ae08aaf-8f18-4fa5-9241-90b40ff0a8e5
+X-Content-Type-Options: nosniff
+X-Frame-Options: DENY
+X-Xss-Protection: 1; mode=block
+Referrer-Policy: strict-origin-when-cross-origin
+Ratelimit-Policy: 100;w=60
+Ratelimit-Limit: 100
+Ratelimit-Remaining: 99
+Ratelimit-Reset: 60
+Etag: W/"48-+Z5A4MsbyryWjwqUCtZ7548heDc"
+Via: 1.1 vegur
+cf-cache-status: DYNAMIC
+Server: cloudflare
+server-timing: cfL4;desc="?proto=TCP&rtt=48920&min_rtt=48231&rtt_var=14867&sent=5&recv=6&lost=0&retrans=0&sent_bytes=3106&recv_bytes=862&delivery_rate=77476&cwnd=138&unsent_bytes=0&cid=59dcc1c5411a7944&ts=223&x=0"
+
+{
+    "error": "Missing API key.",
+    "how_to_get_one": "https://reqres.in/signup"
+}

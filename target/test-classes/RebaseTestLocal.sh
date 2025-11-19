@@ -1,0 +1,1 @@
+mvn test -Dtest="JAVATest#RebaseTest" -DUrlChrome=Значение для примера

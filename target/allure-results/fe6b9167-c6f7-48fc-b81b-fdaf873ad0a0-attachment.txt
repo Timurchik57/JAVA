@@ -1,0 +1,4 @@
+[[2025-07-11T12:26:53+0500] [SEVERE] https://www.jetbrains.com/idea/ 90:9 TypeError: Cannot read properties of null (reading 'includes')
+    at https://www.jetbrains.com/_assets/banner-rotator.entry.171bc8a80e6ffe3b6887.js:2:42531
+    at Array.map (<anonymous>)
+    at https://www.jetbrains.com/_assets/banner-rotator.entry.171bc8a80e6ffe3b6887.js:2:42468]

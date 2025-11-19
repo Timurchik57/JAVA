@@ -1,0 +1,91 @@
+Request method:	POST
+Request URI:	https://reqres.in/api/users
+Proxy:			<none>
+Request params:	<none>
+Query params:	<none>
+Form params:	<none>
+Path params:	<none>
+Headers:		x-api-key=reqres-free-v1
+				Accept=*/*
+				Content-Type=application/json
+Cookies:		<none>
+Multiparts:		<none>
+Body:
+{
+    "name": "TEST",
+    "job": "TEST"
+}
+HTTP/1.1 201 Created
+Date: Wed, 09 Jul 2025 11:27:26 GMT
+Content-Type: application/json; charset=utf-8
+Content-Length: 78
+Connection: keep-alive
+CF-RAY: 95c778e07f9d8bde-ARN
+Report-To: {"group":"heroku-nel","max_age":3600,"endpoints":[{"url":"https://nel.heroku.com/reports?ts=1752060446&sid=c4c9725f-1ab0-44d8-820f-430df2718e11&s=hZr6dFDdg%2BWb9elY00Q4YphEvUQSkvKfy1m4lCCTyew%3D"}]}
+Reporting-Endpoints: heroku-nel=https://nel.heroku.com/reports?ts=1752060446&sid=c4c9725f-1ab0-44d8-820f-430df2718e11&s=hZr6dFDdg%2BWb9elY00Q4YphEvUQSkvKfy1m4lCCTyew%3D
+Nel: {"report_to":"heroku-nel","max_age":3600,"success_fraction":0.005,"failure_fraction":0.05,"response_headers":["Via"]}
+Access-Control-Allow-Origin: *
+X-Request-Id: df483b4e-e192-45f4-9b7f-e68437e9d899
+X-Content-Type-Options: nosniff
+X-Frame-Options: DENY
+X-Xss-Protection: 1; mode=block
+Referrer-Policy: strict-origin-when-cross-origin
+Ratelimit-Policy: 100;w=60
+Ratelimit-Limit: 100
+Ratelimit-Remaining: 98
+Ratelimit-Reset: 60
+Etag: W/"4e-Y+NiRZHulDxFpomYYif4xnTya3k"
+Via: 1.1 vegur
+cf-cache-status: DYNAMIC
+Server: cloudflare
+server-timing: cfL4;desc="?proto=TCP&rtt=69093&min_rtt=67540&rtt_var=22073&sent=6&recv=6&lost=0&retrans=0&sent_bytes=3105&recv_bytes=889&delivery_rate=51284&cwnd=33&unsent_bytes=0&cid=3eb4dd9fc338fd67&ts=291&x=0"
+
+{
+    "name": "TEST",
+    "job": "TEST",
+    "id": "870",
+    "createdAt": "2025-07-09T11:27:26.912Z"
+}
+Request method:	GET
+Request URI:	https://reqres.in/api/users/870
+Proxy:			<none>
+Request params:	<none>
+Query params:	<none>
+Form params:	<none>
+Path params:	<none>
+Headers:		x-api-key=reqres-free-v1
+				Accept=*/*
+				Content-Type=application/json
+Cookies:		<none>
+Multiparts:		<none>
+Body:			<none>
+HTTP/1.1 404 Not Found
+Date: Wed, 09 Jul 2025 11:27:27 GMT
+Content-Type: application/json; charset=utf-8
+Content-Length: 2
+Connection: keep-alive
+CF-RAY: 95c778e6bd8ba61f-ARN
+Report-To: {"group":"heroku-nel","max_age":3600,"endpoints":[{"url":"https://nel.heroku.com/reports?ts=1752060447&sid=c4c9725f-1ab0-44d8-820f-430df2718e11&s=oxhyAw42qRV1lS%2Bz3JAq1TRNeayu3Z%2BdG67RS2vgYbk%3D"}]}
+Reporting-Endpoints: heroku-nel=https://nel.heroku.com/reports?ts=1752060447&sid=c4c9725f-1ab0-44d8-820f-430df2718e11&s=oxhyAw42qRV1lS%2Bz3JAq1TRNeayu3Z%2BdG67RS2vgYbk%3D
+Nel: {"report_to":"heroku-nel","max_age":3600,"success_fraction":0.005,"failure_fraction":0.05,"response_headers":["Via"]}
+Access-Control-Allow-Origin: *
+X-Request-Id: f93e648b-f04a-45ae-b320-e2f0af5d434a
+X-Content-Type-Options: nosniff
+X-Frame-Options: DENY
+X-Xss-Protection: 1; mode=block
+Referrer-Policy: strict-origin-when-cross-origin
+Ratelimit-Policy: 100;w=60
+Ratelimit-Limit: 100
+Ratelimit-Remaining: 96
+Ratelimit-Reset: 59
+Etag: W/"2-vyGp6PvFo4RvsFtPoIWeCReyIC8"
+Via: 1.1 vegur
+Cache-Control: max-age=14400
+CF-Cache-Status: MISS
+Vary: Accept-Encoding
+Server: cloudflare
+server-timing: cfL4;desc="?proto=TCP&rtt=68317&min_rtt=67798&rtt_var=19625&sent=5&recv=6&lost=0&retrans=0&sent_bytes=3105&recv_bytes=831&delivery_rate=58579&cwnd=99&unsent_bytes=0&cid=252d6ed83571d21b&ts=225&x=0"
+
+{
+    
+}
