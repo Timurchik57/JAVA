@@ -1,4 +1,4 @@
-FROM openjdk:17-alpine
+FROM eclipse-temurin:17-jdk-alpine
 RUN apk update && apk add --no-cache maven
 
 # Копируем локальный архив Allure в директорию /app
