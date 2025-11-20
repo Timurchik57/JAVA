@@ -2,7 +2,10 @@ FROM eclipse-temurin:17-jdk-alpine
 RUN apk update && apk add --no-cache maven
 
 # Копируем локальный архив Allure в директорию /app
-COPY /program/allure-2.23.0 /bin/allure
+COPY /program/allure-2.23.0 /opt/allure-2.23.0
+
+# Добавляем Allure в PATH
+ENV PATH="/opt/allure-2.23.0/bin:${PATH}"
 
 WORKDIR /app
 COPY . /app
