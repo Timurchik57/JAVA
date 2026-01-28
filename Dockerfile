@@ -6,9 +6,6 @@ COPY /program/allure-2.23.0 /opt/allure
 RUN chmod +x /opt/allure/bin/allure \
  && ln -s /opt/allure/bin/allure /usr/local/bin/allure
 
-# Добавляем Allure в PATH
-ENV PATH="/opt/allure-2.23.0/bin:${PATH}"
-
 WORKDIR /app
 COPY . /app
 
