@@ -10,7 +10,6 @@ COPY . /app
 
 RUN mvn clean install -Dmaven.test.skip=true
 
-ENV PATH="/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"
 ENV TestRun ""
 CMD ["sh","-c","$TestRun"]
 
