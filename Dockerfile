@@ -1,8 +1,8 @@
 FROM eclipse-temurin:17-jdk-alpine
 ARG ALLURE_VERSION=2.34.1
-RUN apk update && apk add --no-cache maven dos2unix
 
-# Скачать и распаковать Allure из архива
+RUN apk add --no-cache maven dos2unix curl tar
+
 RUN curl -fsSL -o /tmp/allure.tgz \
       "https://github.com/allure-framework/allure2/releases/download/${ALLURE_VERSION}/allure-${ALLURE_VERSION}.tgz" \
     && mkdir -p /opt \
@@ -17,8 +17,9 @@ COPY . /app
 
 RUN mvn clean install -Dmaven.test.skip=true
 
-ENV TestRun ""
+ENV TestRun=""
 CMD ["sh","-c","$TestRun"]
+
 
 #COPY entrypoint.sh /app/entrypoint.sh
 #RUN chmod +x /app/entrypoint.sh
