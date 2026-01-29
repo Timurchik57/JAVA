@@ -1,6 +1,6 @@
 FROM eclipse-temurin:17-jdk-alpine
-RUN apk update && apk add --no-cache maven dos2unix
 ARG ALLURE_VERSION=2.34.1
+RUN apk update && apk add --no-cache maven dos2unix
 
 # Скачать и распаковать Allure из архива
 RUN curl -fsSL -o /tmp/allure.tgz \
