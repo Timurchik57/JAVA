@@ -18,7 +18,6 @@ COPY . /app
 
 # чтобы компиляция не проходила во время сборки контейнера
 RUN mvn clean install -Dmaven.test.skip=true
-RUN chmod -R 777 /app/target
 
 ENV TestRun=""
 CMD ["sh","-c","$TestRun"]
